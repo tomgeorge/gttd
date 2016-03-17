@@ -34,10 +34,8 @@ Vagrant.configure(2) do |config|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
   end
 
-  # synced folders, need the disabled: true thing because of some CentOS rsync garbage.
+  # synced folders, need the type: "virtualbox" thing because of some CentOS rsync garbage.
   # see https://github.com/mitchellh/vagrant/issues/6154
-  # config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
-  # config.vm.synced_folder "~/git", "/usr/src/git", disabled: true
   config.vm.synced_folder ".", "/home/vagrant/sync", type: "virtualbox"
   config.vm.synced_folder "~/git", "/usr/src/git", type: "virtualbox"
 end
