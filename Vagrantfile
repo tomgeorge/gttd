@@ -20,8 +20,8 @@ Vagrant.configure(2) do |config|
   # install docker
   config.vm.provision "docker"
   # allow vagrant access to docker socket
-  config.vm.provision "shell", inline: "sudo groupadd docker"
-  config.vm.provision "shell", inline: "usermod -a -G docker vagrant"
+  config.vm.provision "shell", inline: "sudo groupadd docker || true"
+  config.vm.provision "shell", inline: "usermod -a -G docker vagrant || true"
   # restart docker
   config.vm.provision "shell", inline: "systemctl restart docker"
 
