@@ -17,8 +17,9 @@ source /home/vagrant/.profile
 nvm install node
 nvm use node
 
-# install dev dependencies
+# install global dev dependencies
 npm install -g webpack
+npm install -g typings
 
 # clone
 git clone https://github.com/tomgeorge/gttd
