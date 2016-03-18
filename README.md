@@ -26,7 +26,9 @@ testing:
 import stylesheet from 'styles/my-styles.scss';
 console.log(stylesheet) // "body{font-size:12px}"
 ```
-	+ Use loaders to build all this stuff: 
+
++ Use loaders to build all this stuff: 
+
 ```
 {
   // When you import a .ts file, parse it with Typescript
@@ -47,8 +49,9 @@ console.log(stylesheet) // "body{font-size:12px}"
 }
 
 ```
-	+ Lets you split the code up, code you dont need wont be brought over from server until you hit it with a page load or ajax or something.	
-	+ Definitely a steep learning curve
+
++ Lets you split the code up, code you dont need wont be brought over from server until you hit it with a page load or ajax or something.	
++ Definitely a steep learning curve
 		
 
 
