@@ -53,6 +53,11 @@ console.log(stylesheet)
 
 + Lets you split the code up: code you dont need wont be brought over from server until you hit it with a page load or ajax or something.
 
++ Use Google Closure compiler for dead code elimination
+
+http://www.npmjs.com/package/webpack-closure-compiler
+
+http://swannodette.github.io/2015/02/23/hello-google-closure-modules/
 
 http://blog.madewithlove.be/post/webpack-your-bags/
 
