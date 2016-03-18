@@ -18,6 +18,7 @@ nvm install node
 nvm use node
 
 # install dev dependencies
-npm install --save-dev babel-cli
 npm install -g webpack
-npm install -g mocha
+
+# clone
+git clone https://github.com/tomgeorge/gttd
