@@ -4,7 +4,7 @@
 sudo yum makecache fast
 sudo yum install yum-utils
 sudo package-cleanup --cleandupes
-sudo yum install -y gcc gcc-c++ make openssl-devel wget dos2unix git python2
+sudo yum install -y gcc gcc-c++ make openssl-devel wget dos2unix git python2 tmux vim
 
 # install nvm
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
