@@ -20,14 +20,15 @@ testing:
     + `npm install`
     + `npm run compile && npm run pretest`
 	+ `mocha`
-+ Build tool choice(would like to use webpack, seems like you can do everything and offers a lot of really nice features 
++ Build tool choice.  I read about webpack and haven't looked at grunt or gulp bc it seems like you can do everything and offers a lot of cool features
 	+ Turns all your stuff (html, css, images) into javascript modules. So you can do something like this:
 ```
 import stylesheet from 'styles/my-styles.scss';
-console.log(stylesheet) // "body{font-size:12px}"
+console.log(stylesheet) 
+=> "body{font-size:12px}"
 ```
 
-+ Use loaders to build all this stuff: 
++ Provides loaders/plugins to build all these modules:
 
 ```
 {
@@ -50,13 +51,17 @@ console.log(stylesheet) // "body{font-size:12px}"
 
 ```
 
-+ Lets you split the code up, code you dont need wont be brought over from server until you hit it with a page load or ajax or something.	
-+ Definitely a steep learning curve
-		
++ Lets you split the code up: code you dont need wont be brought over from server until you hit it with a page load or ajax or something.
 
 
 http://blog.madewithlove.be/post/webpack-your-bags/
+
 https://mochajs.org/#assertions
+
 https://github.com/petehunt/webpack-howto
+
 https://medium.com/@preslavrachev/gulp-vs-grunt-why-one-why-the-other-f5d3b398edc4#.hm6yeff31
 
+http://www.jbrantly.com/typescript-and-webpack/	
+
+http://jonnyreeves.co.uk/2015/hello-typescript-and-mocha/
