@@ -1,16 +1,18 @@
 {
-  "name": "angular",
+  "name": "gttd-angular",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A GTD app in angular",
+  "main": "main.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"compile": "tsc ts/*.ts --module commonjs",
+	"pretest": "tsc test/*.ts --module commonjs",
+    "test": "mocha"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tom George",
   "license": "ISC",
   "devDependencies": {
     "mocha": "^2.4.5"
