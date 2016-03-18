@@ -5,5 +5,7 @@ running some stuff
 `npm run compile`
 
 testing:
+
 `npm run pretest`
+
 `mocha`
