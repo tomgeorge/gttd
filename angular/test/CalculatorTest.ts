@@ -1,5 +1,5 @@
 /// <reference path="../typings/main/ambient/mocha/index.d.ts"/>
-import Calculator from '../ts/index';
+import Calculator from '../src/index';
 
 describe('Calculator', () => {
 	var subject : Calculator;

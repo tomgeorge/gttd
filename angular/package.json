@@ -7,9 +7,9 @@
     "doc": "doc"
   },
   "scripts": {
-	"compile": "tsc ts/*.ts --module commonjs",
+	"compile": "tsc src/*.ts --module commonjs",
 	"pretest": "tsc test/*.ts --module commonjs",
-    "test": "mocha"
+    "test": "mocha test"
   },
   "keywords": [],
   "author": "Tom George",
