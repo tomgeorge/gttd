@@ -1,5 +1,5 @@
 export default class Calculator {
 	add(x : number, y : number): number {
-		return 0;
+		return y + y;
 	}
 }
