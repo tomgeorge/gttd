@@ -33,4 +33,6 @@ Vagrant.configure(2) do |config|
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
   end
+
+  config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
 end

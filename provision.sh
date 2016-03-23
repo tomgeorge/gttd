@@ -21,6 +21,8 @@ nvm use node
 npm install -g webpack
 npm install -g typings
 npm install -g gulp
+npm install -g tsc
+npm install -g mocha
 
 # clone
 git clone https://github.com/tomgeorge/gttd
