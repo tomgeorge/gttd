@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"module": "commonjs"
+	},
+	"files": [
+		"src/index.ts",
+		"typings/main/ambient/mocha/index.d.ts"
+		]
+}
