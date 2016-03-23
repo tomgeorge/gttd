@@ -1,7 +1,8 @@
 module.exports = {  
-	entry: './src/index.ts',
+	entry: "./src/index.ts",
 	output: {
-		filename: 'resources/public/js/bundle.js'
+		filename: "bundle.js",
+		path: './resources/public/js'
 	},
 	resolve: {
 		extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']

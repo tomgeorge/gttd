@@ -1,9 +1,16 @@
 {
 	"compilerOptions": {
-		"module": "commonjs"
+		"target": "es5",
+		"module": "commonjs",
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"removeComments": false
 	},
-	"files": [
-		"src/index.ts",
-		"typings/main/ambient/mocha/index.d.ts"
-		]
+	"exclude": [
+		"node_modules",
+		"typings",
+		"typings/main",
+		"typings/main.d.ts"
+	]
 }

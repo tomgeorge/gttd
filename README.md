@@ -19,7 +19,9 @@ testing:
 
 `mocha`
 
+Running:
 
+`http-server angular/resources/public`
 
 ## TODO ##
 
@@ -29,6 +31,7 @@ testing:
     + `npm install`
     + `npm run compile && npm run pretest`
 	+ `mocha`
+	+ `http-server angular/resources/public`
 + Build tool choice.  I read about webpack and haven't looked at grunt or gulp bc it seems like you can do everything and offers a lot of cool features
 	+ Turns all your stuff (html, css, images) into javascript modules. So you can do something like this:
 ```

@@ -20,6 +20,7 @@ nvm use node
 # install global dev dependencies
 npm install -g webpack
 npm install -g typings
+npm install -g gulp
 
 # clone
 git clone https://github.com/tomgeorge/gttd
