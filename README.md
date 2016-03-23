@@ -1,8 +1,17 @@
 Open the index.html file in your browser.  That's all I got right now.
 
-running some stuff
+Compile: 
 
-`npm run compile`
+`npm install -g tsc`
+
+`tsc`
+
+Or you can just run: 
+
+`webpack`
+
+and It'll create a file in resources/public/js
+
 
 testing:
 
@@ -53,7 +62,7 @@ console.log(stylesheet)
 
 + Lets you split the code up: code you dont need wont be brought over from server until you hit it with a page load or ajax or something.
 
-+ Use Google Closure compiler for dead code elimination
++ Use Google Closure compiler for dead code elimination *(This might not even be worth it)*
 
 http://www.npmjs.com/package/webpack-closure-compiler
 
