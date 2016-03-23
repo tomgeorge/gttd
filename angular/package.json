@@ -7,15 +7,19 @@
     "doc": "doc"
   },
   "scripts": {
-	"compile": "tsc src/*.ts --module commonjs",
-	"pretest": "tsc test/*.ts --module commonjs",
+    "tscwatch": "tscwatch src/*.ts --module commonjs",
+    "compile": "tsc src/*.ts --module commonjs",
+    "pretest": "tsc test/*.ts --module commonjs",
     "test": "mocha test"
   },
   "keywords": [],
   "author": "Tom George",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "mocha-loader": "^0.7.1",
+    "ts-loader": "^0.8.1",
+    "typescript-watcher": "0.0.4"
   },
   "dependencies": {
     "typescript": "^1.8.9"
