@@ -26,7 +26,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: "systemctl restart docker"
 
   # forward port 8080
-  config.vm.network "forwarded_port", guest: 8080, host: 12345
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 3001, host: 3001
 
   # create private network
   config.vm.network "private_network", ip: "192.168.0.123", netmask: "255.255.0.0"
