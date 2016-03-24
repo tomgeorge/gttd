@@ -19,10 +19,13 @@ nvm use node
 
 # install global dev dependencies
 npm install -g webpack
+npm install -g webpack-dev-server
 npm install -g typings
 npm install -g gulp
 npm install -g tsc
 npm install -g mocha
+npm install -g concurrently
+npm install -g jsonlint
 
 # clone
-git clone https://github.com/tomgeorge/gttd
+git clone https://github.com/tomgeorge/gttd || true
