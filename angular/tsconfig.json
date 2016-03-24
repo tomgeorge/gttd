@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "es5",
+		"out": "resources/public/js/app.js",
 		"module": "commonjs",
 		"sourceMap": true,
 		"emitDecoratorMetadata": true,
@@ -9,8 +10,6 @@
 	},
 	"exclude": [
 		"node_modules",
-		"typings",
-		"typings/main",
-		"typings/main.d.ts"
+		"typings"
 	]
 }
