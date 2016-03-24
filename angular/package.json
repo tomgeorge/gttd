@@ -7,12 +7,9 @@
 		"doc": "doc"
 	},
 	"scripts": {
-		"tscwatch": "tscwatch src/*.ts --module commonjs",
-		"compile": "tsc src/*.ts --module commonjs",
-		"pretest": "tsc test/*.ts --module commonjs",
-		"test": "mocha test",
-		"start": "concurrently \"npm run tsc:w\" \"npm run lite\"",
-		"tsc": "tsc",
+		"start": "concurrently \"npm run tsc:w\" \"npm run lite\" \"mocha --watch \" ",
+		"tsc": "tsc", 
+		"tsc:w": "tsc -w", 
 		"lite": "lite-server",
 		"typings": "typings",
 		"postinstall": "typings install"
