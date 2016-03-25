@@ -1,2 +1,14 @@
 .vagrant/
 npm-debug.log
+
+# Ignore native extensions in the node_modules folder (things changed by npm rebuild)
+# see: http://stackoverflow.com/questions/11459475/should-i-check-in-node-modules-to-git-when-creating-a-node-js-app-on-heroku
+node_modules/**/*.node
+node_modules/**/*.o
+node_modules/**/*.a
+node_modules/**/*.mk
+node_modules/**/*.gypi
+node_modules/**/*.target
+node_modules/**/.deps/
+node_modules/**/build/Makefile
+node_modules/**/**/build/Makefile
