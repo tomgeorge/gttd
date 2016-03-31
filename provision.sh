@@ -28,15 +28,16 @@ nvm install v4.4.0
 nvm use v4.4.0
 
 # install global dev dependencies
-npm install -g webpack \
-	       webpack-dev-server\
-	       typings \ 
-	       gulp \
-	       tsc \
-	       mocha \
-	       concurrently \
-	       jsonlint \
-	       eslint
+npm install -g webpack 
+npm install -g webpack-dev-server 
+npm install -g typings
+npm install -g gulp
+npm install -g tsc
+npm install -g mocha
+npm insatll -g concurrently
+npm install -g jsonlint 
+npm install -g eslint
 
 # clone
 git clone https://github.com/tomgeorge/gttd || true
+git clone https://github.com/mike-allison/angular2-webpack-workflow || true
