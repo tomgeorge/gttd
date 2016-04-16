@@ -34,6 +34,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.0.123", netmask: "255.255.0.0"
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+	vb.memory = 2048
   end
 
   config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
