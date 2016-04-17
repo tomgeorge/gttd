@@ -1,17 +1,31 @@
-Open the index.html file in your browser.  That's all I got right now.
+There's a bunch of notes at the bottom.
 
-Compile: 
 
-`npm install -g tsc`
+## Vagrant Box ##
 
-`tsc`
+Seems like it's broken.  Installing node/npm on my Windows machine, I can run the app.  Maybe can't use nvm?
 
-Or you can just run: 
+## Angular ##
 
-`webpack`
+`npm run dev` for live dev server with Hot Module Reloading.  No need to refresh the page.
 
-and It'll create a file in resources/public/js
+`npm run test` for tests
 
+`npm run build` to create minified (not yet I'm getting errors lol) version of the app.
+
+
+## Flash of Unstyled Content on webpack-dev-server loads ##
+
+This is because we `import` the css in the typescript files.  Styles aren't loaded until the javascript is finished.
+
+This does NOT happen on the `build` task.  It uses the [webpack extract-text plugin](https://github.com/webpack/extract-text-webpack-plugin) to put all of our styles into .css files.  I believe it can also chunk these files for async loading.  Not 100% sure though.
+
+
+## Directory structure ##
+
+Still in flux :)
+
+## Assorted notes ##
 
 testing:
 
