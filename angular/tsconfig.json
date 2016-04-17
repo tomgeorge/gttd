@@ -1,15 +1,19 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"out": "resources/public/js/app.js",
-		"module": "commonjs",
-		"sourceMap": true,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"removeComments": false
+			"module": "commonjs",
+			"sourceMap": true,
+			"declaration": false,
+			"outDir": "dist",
+			"rootDir": ".",
+			"emitDecoratorMetadata": true,
+			"experimentalDecorators": true,
+			"removeComments": false
 	},
-	"exclude": [
-		"node_modules",
-		"typings"
-	]
+		"exclude": [
+			"node_modules",
+			"typings/browser",
+			"typings/browser.d.ts",
+			"dist"
+		]
 }
