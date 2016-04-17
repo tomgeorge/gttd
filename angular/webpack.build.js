@@ -1,7 +1,8 @@
 /**
  * Webpack config for builds
  */
-module.exports = require('./webpack.make')({
+const validate = require('webpack-validator');
+module.exports = validate(require('./webpack.make')({
   BUILD: true,
   TEST: false
-});
+}));

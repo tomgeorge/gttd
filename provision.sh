@@ -28,10 +28,9 @@ source /home/vagrant/.profile
 
 # install latest node, npm
 echo "***************************************"
-echo "Installing node v4.4.0"
+echo "Installing node"
 echo "**************************************"
-nvm install v4.4.0
-nvm use v4.4.0
+nvm use node
 
 # install global dev dependencies
 echo "***************************************"
@@ -51,3 +50,4 @@ npm install -g npm-check-updates
 # clone
 git clone https://github.com/tomgeorge/gttd || true
 git clone https://github.com/mike-allison/angular2-webpack-workflow || true
+cd gttd/angular && rm -rf node_modules && npm install
