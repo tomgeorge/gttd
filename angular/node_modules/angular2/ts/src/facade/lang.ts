@@ -62,7 +62,10 @@ export interface Type extends Function {}
 export interface ConcreteType extends Type { new (...args): any; }
 
 export function getTypeNameForDebugging(type: Type): string {
-  return type['name'];
+  if (type['name']) {
+    return type['name'];
+  }
+  return typeof type;
 }
 
 
@@ -121,6 +124,14 @@ export function isBlank(obj: any): boolean {
   return obj === undefined || obj === null;
 }
 
+export function isBoolean(obj: any): boolean {
+  return typeof obj === "boolean";
+}
+
+export function isNumber(obj: any): boolean {
+  return typeof obj === "number";
+}
+
 export function isString(obj: any): boolean {
   return typeof obj === "string";
 }
@@ -143,10 +154,6 @@ export function isPromise(obj: any): boolean {
 
 export function isArray(obj: any): boolean {
   return Array.isArray(obj);
-}
-
-export function isNumber(obj): boolean {
-  return typeof obj === 'number';
 }
 
 export function isDate(obj): boolean {
@@ -343,6 +350,21 @@ export class RegExpWrapper {
     // last time.
     regExp.lastIndex = 0;
     return {re: regExp, input: input};
+  }
+  static replaceAll(regExp: RegExp, input: string, replace: Function): string {
+    let c = regExp.exec(input);
+    let res = '';
+    regExp.lastIndex = 0;
+    let prev = 0;
+    while (c) {
+      res += input.substring(prev, c.index);
+      res += replace(c);
+      prev = c.index + c[0].length;
+      regExp.lastIndex = prev;
+      c = regExp.exec(input);
+    }
+    res += input.substring(prev);
+    return res;
   }
 }
 

@@ -102,6 +102,62 @@ THE SOFTWARE.
 	utils_1.patchClass('FileReader');
 	define_property_1.propertyPatch();
 	register_element_1.registerElementPatch(_global);
+	// Treat XMLHTTPRequest as a macrotask.
+	patchXHR(_global);
+	var XHR_TASK = utils_1.zoneSymbol('xhrTask');
+	function patchXHR(window) {
+	    function findPendingTask(target) {
+	        var pendingTask = target[XHR_TASK];
+	        return pendingTask;
+	    }
+	    function scheduleTask(task) {
+	        var data = task.data;
+	        data.target.addEventListener('readystatechange', function () {
+	            if (data.target.readyState === XMLHttpRequest.DONE) {
+	                if (!data.aborted) {
+	                    task.invoke();
+	                }
+	            }
+	        });
+	        var storedTask = data.target[XHR_TASK];
+	        if (!storedTask) {
+	            data.target[XHR_TASK] = task;
+	        }
+	        setNative.apply(data.target, data.args);
+	        return task;
+	    }
+	    function placeholderCallback() {
+	    }
+	    function clearTask(task) {
+	        var data = task.data;
+	        // Note - ideally, we would call data.target.removeEventListener here, but it's too late
+	        // to prevent it from firing. So instead, we store info for the event listener.
+	        data.aborted = true;
+	        return clearNative.apply(data.target, data.args);
+	    }
+	    var setNative = utils_1.patchMethod(window.XMLHttpRequest.prototype, 'send', function () { return function (self, args) {
+	        var zone = Zone.current;
+	        var options = {
+	            target: self,
+	            isPeriodic: false,
+	            delay: null,
+	            args: args,
+	            aborted: false
+	        };
+	        return zone.scheduleMacroTask('XMLHttpRequest.send', placeholderCallback, options, scheduleTask, clearTask);
+	    }; });
+	    var clearNative = utils_1.patchMethod(window.XMLHttpRequest.prototype, 'abort', function (delegate) { return function (self, args) {
+	        var task = findPendingTask(self);
+	        if (task && typeof task.type == 'string') {
+	            // If the XHR has already completed, do nothing.
+	            if (task.cancelFn == null) {
+	                return;
+	            }
+	            task.zone.cancelTask(task);
+	        }
+	        // Otherwise, we are trying to abort an XHR which has not yet been sent, so there is no task to cancel. Do nothing.
+	    }; });
+	}
 	/// GEO_LOCATION
 	if (_global['navigator'] && _global['navigator'].geolocation) {
 	    utils_1.patchPrototype(_global['navigator'].geolocation, [
@@ -121,7 +177,7 @@ THE SOFTWARE.
 	    function clearTask(task) {
 	        return clearNative(task.data.handleId);
 	    }
-	    var setNative = utils_1.patchMethod(window, setName, function () { return function (self, args) {
+	    var setNative = utils_1.patchMethod(window, setName, function (delegate) { return function (self, args) {
 	        if (typeof args[0] === 'function') {
 	            var zone = Zone.current;
 	            var options = {
@@ -134,12 +190,21 @@ THE SOFTWARE.
 	        }
 	        else {
 	            // cause an error by calling it directly.
-	            return setNative.apply(window, args);
+	            return delegate.apply(window, args);
 	        }
 	    }; });
-	    var clearNative = utils_1.patchMethod(window, cancelName, function () { return function (self, args) {
+	    var clearNative = utils_1.patchMethod(window, cancelName, function (delegate) { return function (self, args) {
 	        var task = args[0];
-	        task.zone.cancelTask(task);
+	        if (task && typeof task.type == 'string') {
+	            if (task.cancelFn && task.data.isPeriodic || task.runCount == 0) {
+	                // Do not cancel already canceled functions
+	                task.zone.cancelTask(task);
+	            }
+	        }
+	        else {
+	            // cause an error by calling it directly.
+	            delegate.apply(window, args);
+	        }
 	    }; });
 	}
 
@@ -242,6 +307,7 @@ THE SOFTWARE.
 	            }
 	        };
 	        Zone.prototype.runTask = function (task, applyThis, applyArgs) {
+	            task.runCount++;
 	            if (task.zone != this)
 	                throw new Error('A task can only be run in the zone which created it! (Creation: ' +
 	                    task.zone.name + '; Execution: ' + this.name + ')');
@@ -260,10 +326,11 @@ THE SOFTWARE.
 	                }
 	            }
 	            finally {
+	                if (task.type == 'macroTask' && task.data && !task.data.isPeriodic) {
+	                    task.cancelFn = null;
+	                }
 	                _currentZone = oldZone;
 	                _currentTask = previousTask;
-	                if (task.type == 'microTask') {
-	                }
 	            }
 	        };
 	        Zone.prototype.scheduleMicroTask = function (source, callback, data, customSchedule) {
@@ -277,6 +344,7 @@ THE SOFTWARE.
 	        };
 	        Zone.prototype.cancelTask = function (task) {
 	            var value = this._zoneDelegate.cancelTask(this, task);
+	            task.runCount = -1;
 	            task.cancelFn = null;
 	            return value;
 	        };
@@ -385,7 +453,6 @@ THE SOFTWARE.
 	            var prev = counts[type];
 	            var next = counts[type] = prev + count;
 	            if (next < 0) {
-	                debugger;
 	                throw new Error('More tasks executed then were scheduled.');
 	            }
 	            if (prev == 0 || next == 0) {
@@ -409,6 +476,7 @@ THE SOFTWARE.
 	    }());
 	    var ZoneTask = (function () {
 	        function ZoneTask(type, zone, source, callback, options, scheduleFn, cancelFn) {
+	            this.runCount = 0;
 	            this.type = type;
 	            this.zone = zone;
 	            this.source = source;
@@ -671,7 +739,7 @@ THE SOFTWARE.
 	"use strict";
 	var utils_1 = __webpack_require__(3);
 	var WTF_ISSUE_555 = 'Anchor,Area,Audio,BR,Base,BaseFont,Body,Button,Canvas,Content,DList,Directory,Div,Embed,FieldSet,Font,Form,Frame,FrameSet,HR,Head,Heading,Html,IFrame,Image,Input,Keygen,LI,Label,Legend,Link,Map,Marquee,Media,Menu,Meta,Meter,Mod,OList,Object,OptGroup,Option,Output,Paragraph,Pre,Progress,Quote,Script,Select,Source,Span,Style,TableCaption,TableCell,TableCol,Table,TableRow,TableSection,TextArea,Title,Track,UList,Unknown,Video';
-	var NO_EVENT_TARGET = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload'.split(',');
+	var NO_EVENT_TARGET = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload,IDBRequest,IDBOpenDBRequest,IDBDatabase,IDBTransaction,IDBCursor,DBIndex'.split(',');
 	var EVENT_TARGET = 'EventTarget';
 	function eventTargetPatch(_global) {
 	    var apis = [];
@@ -700,7 +768,12 @@ THE SOFTWARE.
 /* 3 */
 /***/ function(module, exports) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
+	/* WEBPACK VAR INJECTION */(function(global) {/**
+	 * Suppress closure compiler errors about unknown 'process' variable
+	 * @fileoverview
+	 * @suppress {undefinedVars}
+	 */
+	"use strict";
 	exports.zoneSymbol = Zone['__symbol__'];
 	var _global = typeof window == 'undefined' ? global : window;
 	function bindArguments(args, source) {
@@ -752,8 +825,14 @@ THE SOFTWARE.
 	            this.removeEventListener(eventName, this[_prop]);
 	        }
 	        if (typeof fn === 'function') {
-	            this[_prop] = fn;
-	            this.addEventListener(eventName, fn, false);
+	            var wrapFn = function (event) {
+	                var result;
+	                result = fn.apply(this, arguments);
+	                if (result != undefined && !result)
+	                    event.preventDefault();
+	            };
+	            this[_prop] = wrapFn;
+	            this.addEventListener(eventName, wrapFn, false);
 	        }
 	        else {
 	            this[_prop] = null;
@@ -867,7 +946,7 @@ THE SOFTWARE.
 	    // - When `addEventListener` is called on the global context in strict mode, `this` is undefined
 	    // see https://github.com/angular/zone.js/issues/190
 	    var target = self || _global;
-	    var eventTask = findExistingRegisteredTask(target, handler, eventName, useCapturing, false);
+	    var eventTask = findExistingRegisteredTask(target, handler, eventName, useCapturing, true);
 	    if (eventTask) {
 	        eventTask.zone.cancelTask(eventTask);
 	    }
@@ -1110,6 +1189,14 @@ THE SOFTWARE.
 	            utils_1.patchOnProperties(HTMLElement.prototype, eventNames);
 	        }
 	        utils_1.patchOnProperties(XMLHttpRequest.prototype, null);
+	        if (typeof IDBIndex !== 'undefined') {
+	            utils_1.patchOnProperties(IDBIndex.prototype, null);
+	            utils_1.patchOnProperties(IDBRequest.prototype, null);
+	            utils_1.patchOnProperties(IDBOpenDBRequest.prototype, null);
+	            utils_1.patchOnProperties(IDBDatabase.prototype, null);
+	            utils_1.patchOnProperties(IDBTransaction.prototype, null);
+	            utils_1.patchOnProperties(IDBCursor.prototype, null);
+	        }
 	        if (supportsWebSocket) {
 	            utils_1.patchOnProperties(WebSocket.prototype, null);
 	        }
@@ -1174,7 +1261,7 @@ THE SOFTWARE.
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
 	var utils_1 = __webpack_require__(3);
 	// we have to patch the instance since the proto is non-configurable
 	function apply(_global) {
@@ -1204,9 +1291,11 @@ THE SOFTWARE.
 	        utils_1.patchOnProperties(proxySocket, ['close', 'error', 'message', 'open']);
 	        return proxySocket;
 	    };
+	    global.WebSocket.prototype = Object.create(WS.prototype, { constructor: { value: WebSocket } });
 	}
 	exports.apply = apply;
 
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }
 /******/ ]);
@@ -1339,13 +1428,13 @@ THE SOFTWARE.
 	                    var value = descriptor.value;
 	                    descriptor = {
 	                        get: function () {
-	                            return renderLongStackTrace(parentTask.data[creationTrace], delegateGet ? delegateGet.apply(this) : value);
+	                            return renderLongStackTrace(parentTask.data && parentTask.data[creationTrace], delegateGet ? delegateGet.apply(this) : value);
 	                        }
 	                    };
 	                    Object.defineProperty(error, 'stack', descriptor);
 	                }
 	                else {
-	                    error.stack = renderLongStackTrace(parentTask.data[creationTrace], error.stack);
+	                    error.stack = renderLongStackTrace(parentTask.data && parentTask.data[creationTrace], error.stack);
 	                }
 	            }
 	            return parentZoneDelegate.handleError(targetZone, error);
