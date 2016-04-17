@@ -7,6 +7,8 @@ Seems like it's broken.  Installing node/npm on my Windows machine, I can run th
 
 ## Angular ##
 
+`npm install` first.  If it fails, do it again, and it should probably work.  npm is kind of terrible that way.
+
 `npm run dev` for live dev server with Hot Module Reloading.  No need to refresh the page.
 
 `npm run test` for tests
