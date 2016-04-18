@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack --progress --colors --config webpack.build.js --bail -p --display-modules --display-chunks",
     "dev": "webpack --progress --config webpack.config.js --colors --watch --display-modules --display-chunks",
+    "dev-server": "webpack-dev-server --hot --inline --progress --colors",
     "test": "karma start",
     "typings": "typings",
     "validate": "node webpack.config.js && node webpack.build.js && node webpack.test.js",
