@@ -4,9 +4,9 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin'); 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-const modRewrite = require('connect-modrewrite'); 
+const modRewrite = require('connect-modrewrite');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = function makeWebpackConfig(options) {
@@ -37,13 +37,13 @@ module.exports = function makeWebpackConfig(options) {
 		config.entry = {
 			app : './src/index.ts',
 			vendor : [
-				'es6-shim', 
-				'angular2/bundles/angular2-polyfills', 
-				'angular2/common', 
-				'angular2/core', 
-				'angular2/http', 
-				'angular2/platform/browser', 
-				'angular2/router', 
+				'es6-shim',
+				'angular2/bundles/angular2-polyfills',
+				'angular2/common',
+				'angular2/core',
+				'angular2/http',
+				'angular2/platform/browser',
+				'angular2/router',
 				'rxjs',
 				'jquery',
 				'materialize-css']
