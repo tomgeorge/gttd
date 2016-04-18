@@ -3,7 +3,11 @@ There's a bunch of notes at the bottom.
 
 ## Vagrant Box ##
 
-Seems like it's broken.  Installing node/npm on my Windows machine, I can run the app.  Maybe can't use nvm?
+`vagrant up` should set everything up.
+
+`npm run dev` doesn't work right out of the gate.  Add `host: "0.0.0.0"` to the devServer config in `webpack.make.js`.  Even then, I had to :wq a couple times to get it to pick up.  I think this can be solved with vagrant synced folders.
+
+Need to dockerize it still.  
 
 ## Angular ##
 
@@ -52,7 +56,7 @@ Running:
 	+ Turns all your stuff (html, css, images) into javascript modules. So you can do something like this:
 ```
 import stylesheet from 'styles/my-styles.scss';
-console.log(stylesheet) 
+console.log(stylesheet)
 => "body{font-size:12px}"
 ```
 
@@ -95,6 +99,6 @@ https://github.com/petehunt/webpack-howto
 
 https://medium.com/@preslavrachev/gulp-vs-grunt-why-one-why-the-other-f5d3b398edc4#.hm6yeff31
 
-http://www.jbrantly.com/typescript-and-webpack/	
+http://www.jbrantly.com/typescript-and-webpack/
 
 http://jonnyreeves.co.uk/2015/hello-typescript-and-mocha/
