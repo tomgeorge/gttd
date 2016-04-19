@@ -35,17 +35,9 @@ module.exports = function makeWebpackConfig(options) {
 		config.entry = {}
 	} else {
 		config.entry = {
-			app : './src/index.ts',
-			vendor : [
-				'es6-shim',
-				'angular2/bundles/angular2-polyfills',
-				'angular2/common',
-				'angular2/core',
-				'angular2/http',
-				'angular2/platform/browser',
-				'angular2/router',
-				'rxjs',
-				'material-icons']
+			'polyfills': ['es6-shim/es6-shim.js', 'angular2/bundles/angular2-polyfills'],
+			'vendor' : './src/vendor.ts',
+			'app' : './src/index.ts'
 		}
 	}
 
@@ -64,7 +56,7 @@ module.exports = function makeWebpackConfig(options) {
 
 			// Output path from the view of the page
 			// Uses webpack-dev-server in development
-			publicPath : BUILD ? "./" : 'http://localhost:8080/',
+			publicPath : BUILD ? "/" : 'http://localhost:8081/',
 
 			// Filename for entry points
 			// Only adds hash in build mode
@@ -72,7 +64,7 @@ module.exports = function makeWebpackConfig(options) {
 
 			// Filename for non-entry points
 			// Only adds hash in build mode
-			chunkFilename : BUILD ? '[name].[hash].js' : '[name].bundle.js'
+			chunkFilename : BUILD ? '[name].[hash].chunk.js' : '[name].chunk.js'
 		}
 	}
 
@@ -250,26 +242,27 @@ module.exports = function makeWebpackConfig(options) {
 		// Render index.html
 		config.plugins.push(new HtmlWebpackPlugin({
 			template : './src/index.html',
-			inject : 'body'// ,
-			// minify : BUILD
+			inject : 'body',
+			// minify : BUILD,
+			chunksSortMode: packageSort(['polyfills', 'vendor', 'app'])
 		}), new BrowserSyncPlugin({
 			host : 'localhost',
-			port : 8080,
+			port : 8081,
 			server : {
 				baseDir : ['public']
 			},
 			middleware : [modRewrite(['^[^\\.]*$ /index.html [L]'])]
 		}),
-		new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor'], minChunks: Infinity}))
+		new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'polyfills'], minChunks: Infinity})),
 		// Reference: https://github.com/erikras/react-redux-universal-hot-example/issues/596
 		new webpack.ProvidePlugin({
 			$ : "jquery",
 			jQuery : "jquery",
 			jquery: 'jquery',
-			'window.$': 'jquery',
 			"window.jQuery": 'jquery',
 			"root.jQuery": 'jquery',
-			Hammer : "hammerjs/hammer"
+			"Object.jQuery": 'jquery',
+			Hammer : 'hammerjs/hammer'
 		})
 	}
 
@@ -306,3 +299,37 @@ module.exports = function makeWebpackConfig(options) {
 
 	return config;
 };
+
+// Helper functions
+function root(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return path.join.apply(path, [__dirname].concat(args));
+}
+
+function rootNode(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return root.apply(path, ['node_modules'].concat(args));
+}
+
+function packageSort(packages) {
+  // packages = ['polyfills', 'vendor', 'app']
+  var len = packages.length - 1;
+  var first = packages[0];
+  var last = packages[len];
+  return function sort(a, b) {
+    // polyfills always first
+    if (a.names[0] === first) {
+      return -1;
+    }
+    // main always last
+    if (a.names[0] === last) {
+      return 1;
+    }
+    // vendor before app
+    if (a.names[0] !== first && b.names[0] === last) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+}

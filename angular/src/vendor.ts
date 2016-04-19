@@ -1,6 +1,12 @@
-//import 'angular2/platform/browser';
-//import 'angular2/core';
-//
-//import 'rxjs';
-//import 'jquery';
-//import 'materialize-css'
+import 'jquery';
+import 'hammerjs';
+import 'angular2/platform/browser';
+import 'angular2/common';
+import 'angular2/core';
+import 'angular2/router';
+import 'angular2/http';
+import 'rxjs';
+import 'material-icons';
+import 'angular2-materialize';
+import 'materializecss';
+import 'materialize';
