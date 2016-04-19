@@ -45,8 +45,7 @@ module.exports = function makeWebpackConfig(options) {
 				'angular2/platform/browser',
 				'angular2/router',
 				'rxjs',
-				'jquery',
-				'materialize-css']
+				'material-icons']
 		}
 	}
 
@@ -85,7 +84,13 @@ module.exports = function makeWebpackConfig(options) {
 	config.resolve = {
 		root : [path.join(__dirname, "node_modules")],
 		fallback : [path.join(__dirname, "bower_components")],
-		extensions : ['', '.ts', '.js', '.webpack.js']
+		extensions : ['', '.ts', '.js', '.webpack.js'],
+		alias : {
+			materializecss: 'materialize-css/dist/css/materialize.css',
+			materialize: 'materialize-css/dist/js/materialize.js',
+			jQuery: 'jquery',
+			$: 'jquery'
+		}
 	};
 
 	/**
@@ -144,6 +149,15 @@ module.exports = function makeWebpackConfig(options) {
 			test : /\.ts$/,
 			loader : 'ts-loader',
 			exclude : /node_modules|bower_components/
+		}, {
+			test : /materialize-css\/dist\/js\/materialize\.js/,
+			loader : 'imports?materializecss'
+		}, {
+			test: /materialize\.css$/, loader:
+			'style-loader!css-loader'
+		}, {
+			test: /\.styl$/,
+			loader: 'style!css!stylus-loader'
 		}]
 	};
 
@@ -167,7 +181,7 @@ module.exports = function makeWebpackConfig(options) {
 		// Reference: https://github.com/postcss/postcss-loader
 		// Postprocess your css with PostCSS plugins
 		var cssLoader = {
-			test : /\.css$/,
+			test : /^((?!materialize).)*\.css$/,
 			// Reference: https://github.com/webpack/extract-text-webpack-plugin
 			// Extract css files in production builds
 			//
@@ -248,9 +262,15 @@ module.exports = function makeWebpackConfig(options) {
 		}),
 		new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor'], minChunks: Infinity}))
 		// Reference: https://github.com/erikras/react-redux-universal-hot-example/issues/596
-		// new webpack.ProvidePlugin({
-			// $ : "jquery",
-			// jQuery : "jquery"}
+		new webpack.ProvidePlugin({
+			$ : "jquery",
+			jQuery : "jquery",
+			jquery: 'jquery',
+			'window.$': 'jquery',
+			"window.jQuery": 'jquery',
+			"root.jQuery": 'jquery',
+			Hammer : "hammerjs/hammer"
+		})
 	}
 
 	// Add build specific plugins
