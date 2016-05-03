@@ -1,11 +1,13 @@
-import { Component }       from 'angular2/core';
+import { Component, AfterViewInit, Directive}       from 'angular2/core';
 import { HeroService }     from './hero.service';
 import { HeroesComponent } from './heroes.component';
 import { DashboardComponent } from './dashboard.component';
 import { TodoContextComponent } from './todo-context.component';
 import { TodoContextService } from './todo-context.service';
-
+import { MaterializeDirective } from 'angular2-materialize';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+
+declare var $:any;
 
 @Component({
     selector: 'my-app',
@@ -16,7 +18,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">{{title}}</a>
                         <ul class="right hide-on-med-and-down">
-                            <li class="active"><a [routerLink]="['Dashboard']">Dashboard</a></li>
+                            <li><a class="waves-effect waves-teal" [routerLink]="['Dashboard']">Dashboard</a></li>
                             <li><a [routerLink]="['Heroes']">Heroes</a></li>
                         </ul>
                 </div>
@@ -62,6 +64,45 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
             HeroService,
             TodoContextService
         ]
+=======
+						<ul class="side-nav" id="slide-out">
+							<li><a href="sass.html">Sass</a></li>
+							<li><a href="badges.html">Components</a></li>
+							<li><a href="collapsible.html">Javascript</a></li>
+							<li><a href="mobile.html">Mobile</a></li>
+						</ul>
+					</div>
+                </nav>
+        <!-- <todo-context>Scooby Doo</todo-context> -->
+        </header>
+    	<div class="container">
+        <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+        </ul>
+        	<router-outlet></router-outlet>
+    	</div>
+        `,
+    directives: [ROUTER_DIRECTIVES,
+    			 TodoContextComponent,
+                 MaterializeDirective],
+    providers: [
+        ROUTER_PROVIDERS,
+        HeroService,
+        TodoContextService,
+        MaterializeDirective
+    ]
+>>>>>>> Stashed changes
 })
 
 @RouteConfig([
@@ -84,5 +125,6 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
 ])
 
 export class AppComponent {
+
     title = 'gttd';
 }

@@ -30,24 +30,24 @@ source /home/vagrant/.profile
 echo "***************************************"
 echo "Installing node"
 echo "**************************************"
-nvm use node
+nvm install node
 
 # install global dev dependencies
 echo "***************************************"
 echo "Installing global node dependencies"
 echo "**************************************"
-npm install -g webpack 
-npm install -g webpack-dev-server 
-npm install -g typings
-npm install -g gulp
-npm install -g tsc
-npm install -g mocha
-npm insatll -g concurrently
-npm install -g jsonlint 
-npm install -g eslint
-npm install -g npm-check-updates
+# npm install -g webpack 
+# npm install -g webpack-dev-server 
+# npm install -g typings
+# npm install -g gulp
+# npm install -g tsc
+# npm install -g mocha
+# npm insatll -g concurrently
+# npm install -g jsonlint 
+# npm install -g eslint
+# npm install -g npm-check-updates
 
 # clone
-git clone https://github.com/tomgeorge/gttd || true
-git clone https://github.com/mike-allison/angular2-webpack-workflow || true
-cd gttd/angular && rm -rf node_modules && npm install
+# git clone https://github.com/tomgeorge/gttd || true
+# git clone https://github.com/mike-allison/angular2-webpack-workflow || true
+# cd gttd/angular && rm -rf node_modules && npm install

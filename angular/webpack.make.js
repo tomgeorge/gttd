@@ -143,7 +143,7 @@ module.exports = function makeWebpackConfig(options) {
 			exclude : /node_modules|bower_components/
 		}, {
 			test : /materialize-css\/dist\/js\/materialize\.js/,
-			loader : 'imports?materializecss'
+			loader : 'imports?materializecss,$=jquery'
 		}, {
 			test: /materialize\.css$/, loader:
 			'style-loader!css-loader'
