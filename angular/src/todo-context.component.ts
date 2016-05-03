@@ -9,10 +9,6 @@ let template = `
                 <ul id="nav-mobile" class="side-nav fixed">
                     <li class="bold" *ngFor="#context of contexts"><a href="#!">{{context.name}}</a></li>
                 </ul>
-                <ul id="slide-out" class="side-nav">
-                    <li class="bold" *ngFor="#context of contexts"><a href="#!">{{context.name}}</a></li>
-                </ul>
-
 `;
 
 
