@@ -27,7 +27,7 @@ declare var $:any;
         </nav>
     </header>
     <main>
-        <div class="container">
+        <div class="container page-flexbox-wrapper">
             <router-outlet></router-outlet>
         </div>
     </main>
