@@ -56,7 +56,7 @@ module.exports = function makeWebpackConfig(options) {
 
 			// Output path from the view of the page
 			// Uses webpack-dev-server in development
-			publicPath : BUILD ? "/" : 'http://localhost:8081/',
+			publicPath : BUILD ? "/" : 'http://localhost:8080/',
 
 			// Filename for entry points
 			// Only adds hash in build mode
@@ -247,7 +247,7 @@ module.exports = function makeWebpackConfig(options) {
 			chunksSortMode: packageSort(['polyfills', 'vendor', 'app'])
 		}), new BrowserSyncPlugin({
 			host : 'localhost',
-			port : 8081,
+			port : 8080,
 			server : {
 				baseDir : ['public']
 			},
