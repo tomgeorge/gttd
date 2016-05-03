@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "centos/7"
+  config.vm.box = "ubuntu/trusty64"
 
   # install node et al
   config.vm.provision "shell", path: "provision.sh", privileged: false
@@ -36,6 +36,4 @@ Vagrant.configure(2) do |config|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
 	vb.memory = 2048
   end
-
-  config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
 end

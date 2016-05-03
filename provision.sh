@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 # update cache and install utils
-sudo yum makecache fast
-sudo yum install yum-utils
-sudo package-cleanup --cleandupes
-sudo yum install -y gcc \
+sudo apt-get update
+sudo apt-get install -y gcc \
 		    gcc-c++ \
 		    make \
 		    openssl-devel \
@@ -14,7 +12,11 @@ sudo yum install -y gcc \
 		    python2 \
 		    tmux \
 		    vim \
-		    zsh
+		    zsh \
+		    net-tools
+
+
+sudo chsh -s zsh
 
 # install nvm
 echo "***************************************"
@@ -30,24 +32,19 @@ source /home/vagrant/.profile
 echo "***************************************"
 echo "Installing node"
 echo "**************************************"
-nvm use node
+nvm install node
 
 # install global dev dependencies
 echo "***************************************"
 echo "Installing global node dependencies"
 echo "**************************************"
-npm install -g webpack 
-npm install -g webpack-dev-server 
-npm install -g typings
-npm install -g gulp
-npm install -g tsc
-npm install -g mocha
-npm insatll -g concurrently
-npm install -g jsonlint 
-npm install -g eslint
-npm install -g npm-check-updates
 
 # clone
 git clone https://github.com/tomgeorge/gttd || true
-git clone https://github.com/mike-allison/angular2-webpack-workflow || true
 cd gttd/angular && rm -rf node_modules && npm install
+
+# docker compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+mkdir -p ~/.zsh/completion
+sudo curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
