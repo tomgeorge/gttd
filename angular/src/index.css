@@ -1,3 +1,13 @@
+.page-flexbox-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+#main {
+    flex: 1 0 auto;
+  }
+
 .selected {
     background-color: #CFD8DC !important;
     color: white;
@@ -45,3 +55,4 @@
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
+
