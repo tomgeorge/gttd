@@ -13,7 +13,7 @@ declare var $:any;
     selector: 'my-app',
     template: `
     <header>
-        <nav class="top-nav">
+        <nav class="top-nav blue">
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">{{title}}</a>
@@ -31,8 +31,8 @@ declare var $:any;
             <router-outlet></router-outlet>
         </div>
     </main>
-    <footer class="page-footer">
-         <div class="container">
+    <footer class="page-footer blue">
+          <div class="container">
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">Footer Content</h5>
@@ -55,8 +55,8 @@ declare var $:any;
             <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
           </div>
-    </footer>
-    `,
+        </footer>    
+	`,
     directives: [ROUTER_DIRECTIVES,
         TodoContextComponent],
         providers: [
@@ -64,45 +64,6 @@ declare var $:any;
             HeroService,
             TodoContextService
         ]
-=======
-						<ul class="side-nav" id="slide-out">
-							<li><a href="sass.html">Sass</a></li>
-							<li><a href="badges.html">Components</a></li>
-							<li><a href="collapsible.html">Javascript</a></li>
-							<li><a href="mobile.html">Mobile</a></li>
-						</ul>
-					</div>
-                </nav>
-        <!-- <todo-context>Scooby Doo</todo-context> -->
-        </header>
-    	<div class="container">
-        <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
-          <li>
-            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-          </li>
-        </ul>
-        	<router-outlet></router-outlet>
-    	</div>
-        `,
-    directives: [ROUTER_DIRECTIVES,
-    			 TodoContextComponent,
-                 MaterializeDirective],
-    providers: [
-        ROUTER_PROVIDERS,
-        HeroService,
-        TodoContextService,
-        MaterializeDirective
-    ]
->>>>>>> Stashed changes
 })
 
 @RouteConfig([
