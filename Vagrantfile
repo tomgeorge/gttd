@@ -36,4 +36,5 @@ Vagrant.configure(2) do |config|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
 	vb.memory = 2048
   end
+  config.vm.synced_folder "~/git/gttd", "/home/vagrant/app", type: "rsync"
 end

@@ -1,13 +1,21 @@
-FROM node:argon
+FROM node:4.3.2
+CMD sh -c "cd ${PROJECT_PATH:-/}; exec /bin/bash"
 
-RUN mkdir -p /usr/src/app
+#RUN useradd --user-group --create-home --shell /bin/false app &&\
+#  npm install --global npm@3.7.5
 
-WORKDIR /usr/src/app
+#ENV HOME=/home/app
 
-COPY package.json /usr/src/app
-RUN npm install
+#COPY package.json npm-shrinkwrap.json $HOME/gttd
+#RUN chown -R app:app $HOME/*
 
-COPY . /usr/src/app
+#USER app
+#WORKDIR $HOME/gttd
+#RUN npm install
 
-EXPOSE 8081
-ENTRYPOINT ["npm", "run", "dev"]
+#USER root
+#COPY . $HOME/chat
+#RUN chown -R app:app $HOME/*
+#USER app
+
+#CMD ["node", "index.js"]

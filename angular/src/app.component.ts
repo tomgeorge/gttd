@@ -55,7 +55,7 @@ declare var $:any;
             <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
           </div>
-        </footer>    
+        </footer>
 	`,
     directives: [ROUTER_DIRECTIVES,
         TodoContextComponent],
@@ -87,5 +87,5 @@ declare var $:any;
 
 export class AppComponent {
 
-    title = 'gttd';
+    title = 'george';
 }
