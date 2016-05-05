@@ -1,15 +1,18 @@
 There's a bunch of notes at the bottom.
 
+# NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
 ## Vagrant Box ##
 
 `vagrant up` should set everything up.
 
-`npm run dev` doesn't work right out of the gate.  Add `host: "0.0.0.0"` to the devServer config in `webpack.make.js`.  Even then, I had to :wq a couple times to get it to pick up.  I think this can be solved with vagrant synced folders.
+If `npm run dev` doesn't work right out of the gate, try adding `host: "0.0.0.0"` to the devServer config in `webpack.make.js`.
 
 Need to dockerize it still.  
 
 ## Angular ##
+
+`cd angular`
 
 `npm install` first.  If it fails, do it again, and it should probably work.  npm is kind of terrible that way.
 
