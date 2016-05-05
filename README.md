@@ -2,6 +2,16 @@ There's a bunch of notes at the bottom.
 
 # NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
+## running locally ##
+
+If you're behind cntlm:
+
+`npm config set http-proxy <cntlm URL>`
+
+`npm config set https-proxy <cntlm URL>`
+
+`npm set loglevel info`
+
 ## Vagrant Box ##
 
 `vagrant up` should set everything up.
