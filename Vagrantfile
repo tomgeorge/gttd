@@ -23,7 +23,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: "sudo groupadd docker || true"
   config.vm.provision "shell", inline: "usermod -a -G docker vagrant || true"
   # restart docker
-  config.vm.provision "shell", inline: "systemctl restart docker"
+  # config.vm.provision "shell", inline: "systemctl restart docker"
+  config.vm.provision "shell", inline: "service docker restart"
 
   # forward port 8080
   config.vm.network "forwarded_port", guest: 8080, host: 8080
@@ -34,7 +35,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.0.123", netmask: "255.255.0.0"
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-	vb.memory = 2048
+	  vb.memory = 2048
+    #vb.gui = true
   end
-  config.vm.synced_folder "~/git/gttd", "/home/vagrant/app"# , type: "rsync"
+  config.vm.synced_folder "C:\\eclipse_workspaces\\gttd", "/home/vagrant/app"# , type: "rsync"
 end
