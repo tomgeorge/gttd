@@ -1,4 +1,4 @@
-export class ToDo {
+export class Todo {
   id : number;
   name : string;
   description : string;

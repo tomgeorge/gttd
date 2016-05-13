@@ -1,7 +1,9 @@
 import { Component, AfterViewInit, Directive}       from 'angular2/core';
 import { HeroService }     from './hero.service';
+import { TodoService }     from './todo.service';
 import { HeroesComponent } from './heroes.component';
 import { DashboardComponent } from './dashboard.component';
+import { TodoListComponent } from './todolist.component';
 import { TodoContextComponent } from './todo-context.component';
 import { TodoContextService } from './todo-context.service';
 import { MaterializeDirective } from 'angular2-materialize';
@@ -20,6 +22,7 @@ declare var $:any;
                         <ul class="right hide-on-med-and-down">
                             <li><a class="waves-effect waves-teal" [routerLink]="['Dashboard']">Dashboard</a></li>
                             <li><a [routerLink]="['Heroes']">Heroes</a></li>
+                            <li><a [routerLink]="['Todos']">Todos</a></li>
                         </ul>
                 </div>
             </div>
@@ -62,7 +65,8 @@ declare var $:any;
         providers: [
             ROUTER_PROVIDERS,
             HeroService,
-            TodoContextService
+            TodoContextService,
+            TodoService
         ]
 })
 
@@ -82,10 +86,15 @@ declare var $:any;
         path: '/contexts',
         name: 'Contexts',
         component: TodoContextComponent
+    },
+    {
+        path: '/todos',
+        name: 'Todos',
+        component: TodoListComponent
     }
 ])
 
 export class AppComponent {
 
-    title = 'george';
+    title = 'SPunerMan';
 }
