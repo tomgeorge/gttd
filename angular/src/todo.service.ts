@@ -4,10 +4,10 @@ import {TODOS} from './mock-todos';
 
 @Injectable()
 export class TodoService {
-    getTodoes() {
+    getTodos() {
         return Promise.resolve(TODOS);
     }
-    getTodoesSlowly() {
+    getTodosSlowly() {
         return new Promise<Todo[]>(resolve =>
             setTimeout(()=>resolve(TODOS), 2000)
         );

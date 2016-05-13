@@ -9,7 +9,6 @@ import { TodoContextService } from './todo-context.service';
 import { MaterializeDirective } from 'angular2-materialize';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
-declare var $:any;
 
 @Component({
     selector: 'my-app',

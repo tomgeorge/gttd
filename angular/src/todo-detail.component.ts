@@ -3,20 +3,18 @@ import {Todo} from './todo';
 
 let template = `
   <div *ngIf="todo">
-    <h2>{{todo.name}} details!</h2>
     <div><label>id: </label>{{todo.id}}</div>
-    <div>
-      <label>description: </label>
-      <h2>{{todo.description}}</h2>
-    </div>
+    <div><label>description: </label>{{todo.description}}</div>
+    <div><label>estimate: </label>{{todo.estimate}}</div>
+    <div><label>in progress?: </label>{{todo.inProgress}}</div>
   </div>
 `;
 
 @Component({
-    selector: 'my-todo-detail',
+    selector: 'todo-detail',
     template: template
 })
 export class TodoDetailComponent {
     @Input()
-    todo: todo;
+    todo: Todo;
 }
