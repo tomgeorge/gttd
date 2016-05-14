@@ -10,11 +10,10 @@ let template = `
         <h2>My Todos</h2>
         <ul materialize="collapsible" class="collapsible" data-collapsible="accordian">
             <li *ngFor="#todo of Todos"
-            [class.selected]="todo === selectedTodo"
             (click)="onSelect(todo)">
-              <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{todo.name}}</div>
+              <div id="this" class="collapsible-header"><i class="material-icons">filter_drama</i>{{todo.name}}</div>
               <div class="collapsible-body">
-                <p><todo-detail [todo]="selectedTodo"></todo-detail></p>
+                <p><todo-detail [todo]=todo></todo-detail></p>
               </div>
             </li>
         </ul>
