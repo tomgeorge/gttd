@@ -20,7 +20,7 @@ let template = `
 @Component({
     selector: 'my-todos',
     template: template,
-    directives: [TodoDetailComponent]
+    directives: [TodoDetailComponent],
     providers: []
 })
 

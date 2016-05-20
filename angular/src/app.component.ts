@@ -56,9 +56,8 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
           </div>
         </footer>
 	`,
-    directives: [ROUTER_DIRECTIVES]
-        providers: [
-            ROUTER_PROVIDERS,
+    directives: [ROUTER_DIRECTIVES],
+        providers: [ROUTER_PROVIDERS,
             HeroService,
             TodoService
         ]
