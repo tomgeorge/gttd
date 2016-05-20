@@ -4,8 +4,6 @@ import { TodoService }     from './todo.service';
 import { HeroesComponent } from './heroes.component';
 import { DashboardComponent } from './dashboard.component';
 import { TodoListComponent } from './todolist.component';
-import { TodoContextComponent } from './todo-context.component';
-import { TodoContextService } from './todo-context.service';
 import { MaterializeDirective } from 'angular2-materialize';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
@@ -25,7 +23,6 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
                         </ul>
                 </div>
             </div>
-            <!--<todo-context>Scooby Doo</todo-context>-->
         </nav>
     </header>
     <main>
@@ -59,12 +56,10 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
           </div>
         </footer>
 	`,
-    directives: [ROUTER_DIRECTIVES,
-        TodoContextComponent],
+    directives: [ROUTER_DIRECTIVES]
         providers: [
             ROUTER_PROVIDERS,
             HeroService,
-            TodoContextService,
             TodoService
         ]
 })
@@ -78,22 +73,17 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
     {
         path: '/dashboard',
         name: 'Dashboard',
-        component: DashboardComponent,
-        useAsDefault: true
-    },
-    {
-        path: '/contexts',
-        name: 'Contexts',
-        component: TodoContextComponent
+        component: DashboardComponent
     },
     {
         path: '/todos',
         name: 'Todos',
-        component: TodoListComponent
+        component: TodoListComponent,
+        useAsDefault: true
     }
 ])
 
 export class AppComponent {
 
-    title = 'SPunerMan';
+    title = 'Is YOUR world a whirlwind of clutter?';
 }

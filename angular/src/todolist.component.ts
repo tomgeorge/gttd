@@ -2,16 +2,14 @@ import {Component, OnInit} from 'angular2/core';
 import {Todo} from './todo';
 import {TodoService} from './todo.service';
 import {TodoDetailComponent} from './todo-detail.component';
-import { MaterializeDirective } from 'angular2-materialize';
-import './index.css';
 
 let template = `
         <h1>{{title}}</h1>
         <h2>My Todos</h2>
-        <ul materialize="collapsible" class="collapsible" data-collapsible="accordian">
+        <ul class="collapsible" data-collapsible="accordian">
             <li *ngFor="#todo of Todos"
             (click)="onSelect(todo)">
-              <div id="this" class="collapsible-header"><i class="material-icons">filter_drama</i>{{todo.name}}</div>
+              <div id="this" class="collapsible-header"><i class="material-icons">label_outline</i>{{todo.name}}</div>
               <div class="collapsible-body">
                 <p><todo-detail [todo]=todo></todo-detail></p>
               </div>
@@ -22,8 +20,7 @@ let template = `
 @Component({
     selector: 'my-todos',
     template: template,
-    directives: [TodoDetailComponent,
-                 MaterializeDirective],
+    directives: [TodoDetailComponent]
     providers: []
 })
 
