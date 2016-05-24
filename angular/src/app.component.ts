@@ -95,5 +95,5 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
 
 export class AppComponent {
 
-    title = 'SPunerMan';
+    title = 'SPUnerMan';
 }

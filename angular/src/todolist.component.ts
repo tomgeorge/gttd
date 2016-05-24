@@ -11,7 +11,12 @@ let template = `
         <ul materialize="collapsible" class="collapsible" data-collapsible="accordian">
             <li *ngFor="#todo of Todos"
             (click)="onSelect(todo)">
-              <div id="this" class="collapsible-header"><i class="material-icons">filter_drama</i>{{todo.name}}</div>
+              <div id="this"
+                 class="collapsible-header">
+                <i class="material-icons green">done</i>
+                <!-- <input class="toggle green" type="checkbox" (click)="toggle()" [checked]="item.completed"> -->
+                <span class="waves-effect">{{todo.name}}</span>
+              </div>
               <div class="collapsible-body">
                 <p><todo-detail [todo]=todo></todo-detail></p>
               </div>

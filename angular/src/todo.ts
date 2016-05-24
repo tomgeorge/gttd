@@ -5,4 +5,5 @@ export class Todo {
   inProgress : boolean;
   time : number;
   estimate : number;
+  complete: boolean;
 }
