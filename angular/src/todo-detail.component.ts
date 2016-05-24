@@ -3,7 +3,6 @@ import {Todo} from './todo';
 
 let template = `
   <div *ngIf="todo">
-    <div><label>id: </label>{{todo.id}}</div>
     <div><label>description: </label>{{todo.description}}</div>
     <div><label>estimate: </label>{{todo.estimate}}</div>
     <div><label>in progress?: </label>{{todo.inProgress}}</div>
