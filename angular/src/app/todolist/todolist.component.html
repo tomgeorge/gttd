@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<h2>My Todos</h2>
+<ul class="collapsible" data-collapsible="accordian">
+    <li *ngFor="#todo of Todos"
+    (click)="onSelect(todo)">
+      <div class="collapsible-header"><i class="material-icons">label_outline</i>{{todo.name}}</div>
+      <div class="collapsible-body">
+          <todo-detail [todo]="todo"></todo-detail>
+      </div>
+    </li>
+</ul>

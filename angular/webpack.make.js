@@ -121,7 +121,8 @@ module.exports = function makeWebpackConfig(options) {
 			// Reference: https://github.com/WearyMonkey/ngtemplate-loader
 			// Allow loading html through js
 			test : /\.html$/,
-			loader : "ngtemplate?relativeTo=" + (path.resolve(__dirname, './src')) + "/!html-loader"
+			// loader : "ngtemplate?relativeTo=" + (path.resolve(__dirname, './src/app')) + "/!html-loader"
+            loader: 'html'
 		}, {
 			// ASSET LOADER
 			// Reference: https://github.com/webpack/file-loader
@@ -136,7 +137,7 @@ module.exports = function makeWebpackConfig(options) {
 			loader : "url-loader?limit=10000&minetype=application/font-woff"
 		}, {
 			test : /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-			loader : "file-loader"
+			loader : 'file-loader'
 		}, {
 			test : /\.ts$/,
 			loader : 'ts-loader',
