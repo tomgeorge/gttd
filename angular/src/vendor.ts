@@ -10,3 +10,6 @@ import 'angular2/router';
 import 'angular2/http';
 import 'rxjs';
 import 'material-icons';
+import 'immutable';
+import 'redux';
+import 'node-uuid';

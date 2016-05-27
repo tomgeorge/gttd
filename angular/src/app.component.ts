@@ -4,6 +4,7 @@ import { TodoService }     from './todo.service';
 import { HeroesComponent } from './heroes.component';
 import { DashboardComponent } from './dashboard.component';
 import { TodoListComponent } from './todolist.component';
+import { TodoList } from './todolist/todolist';
 import { MaterializeDirective } from 'angular2-materialize';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
@@ -20,6 +21,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
                             <li><a class="waves-effect waves-teal" [routerLink]="['Dashboard']">Dashboard</a></li>
                             <li><a [routerLink]="['Heroes']">Heroes</a></li>
                             <li><a [routerLink]="['Todos']">Todos</a></li>
+                            <li><a [routerLink]="['SpoonDos']">SpoonDos</a></li>
                         </ul>
                 </div>
             </div>
@@ -77,9 +79,15 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
     {
         path: '/todos',
         name: 'Todos',
-        component: TodoListComponent,
+        component: TodoListComponent
+    },
+    {
+        path: '/spoondos',
+        name: 'SpoonDos',
+        component: TodoList,
         useAsDefault: true
     }
+
 ])
 
 export class AppComponent {

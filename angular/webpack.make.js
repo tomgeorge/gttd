@@ -121,7 +121,7 @@ module.exports = function makeWebpackConfig(options) {
 			// Reference: https://github.com/WearyMonkey/ngtemplate-loader
 			// Allow loading html through js
 			test : /\.html$/,
-			loader : "ngtemplate?relativeTo=" + (path.resolve(__dirname, './src')) + "/!html-loader"
+			loader : "ngtemplate?relativeTo=" + (path.resolve(__dirname, './src')) + "/!html"
 		}, {
 			// ASSET LOADER
 			// Reference: https://github.com/webpack/file-loader
