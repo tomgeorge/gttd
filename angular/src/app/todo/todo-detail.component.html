@@ -1,4 +1,6 @@
 <div *ngIf="todo">
+  <input class="toggle" type="checkbox" (click)="toggle()"
+        [checked]="todo.completed">
   <div><label>description: </label>{{todo.description}}</div>
   <div><label>estimate: </label>{{todo.estimate}}</div>
   <div><label>in progress?: </label>{{todo.inProgress}}</div>

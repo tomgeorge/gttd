@@ -1,0 +1,13 @@
+
+   .Running:before {
+       font-size:1.3em;
+       color:green;
+       padding-right: 4px; /* plus 4px spacing */
+   }
+
+   .Paused:before {
+       font-size:1.3em;
+       color:red;
+       padding-right: 4px; /* plus 4px spacing */
+       visibility: hidden;
+   }

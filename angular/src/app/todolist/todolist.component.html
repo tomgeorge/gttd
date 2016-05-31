@@ -3,7 +3,17 @@
 <ul class="collapsible" data-collapsible="accordian">
     <li *ngFor="#todo of Todos"
     (click)="onSelect(todo)">
-      <div class="collapsible-header"><i class="material-icons">label_outline</i>{{todo.name}}</div>
+      <div class="collapsible-header" >
+        <input class="toggle" type="checkbox" (click)="toggle(todo)"
+              [checked]="todo.completed">
+        <i class="material-icons">label_outline</i>{{todo.name}}
+        <span ng-non-bindable>{{todo.time | date: 'HH:mm:ss'}}</span>
+        <button class="play" [hidden]="!todo.inProgress">PLAY</button>
+        <button class="pause" [hidden]="todo.inProgress">PAUSE</button>
+
+        <a [hidden]="!todo.inProgress" class="btn-floating green">
+          <i class="material-icons">play_circle_outline</i></a>
+      </div>
       <div class="collapsible-body">
           <todo-detail [todo]="todo"></todo-detail>
       </div>
