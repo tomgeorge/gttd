@@ -1,7 +1,21 @@
-<div *ngIf="todo">
+  <li>
+     <div class="collapsible-header" >
+    <input class="toggle" type="checkbox" (click)="toggle(todo)"
+          [checked]="todo.completed">
+    <i class="material-icons">label_outline</i>{{todo.name}}
+    <span ng-non-bindable>{{todo.time | date: 'HH:mm:ss'}}</span>
+    <button class="play" [hidden]="!todo.inProgress">PLAY</button>
+    <button class="pause" [hidden]="todo.inProgress">PAUSE</button>
+
+    <a [hidden]="!todo.inProgress" class="btn-floating green">
+      <i class="material-icons">play_circle_outline</i></a>
+  </div>
+  <div class="collapsible-body">
+    <div><label>description: </label>{{todo.description}}</div>
+    <div><label>estimate: </label>{{todo.estimate}}</div>
+    <div><label>in progress?: </label>{{todo.inProgress}}</div>
+  </div>
   <input class="toggle" type="checkbox" (click)="toggle()"
         [checked]="todo.completed">
-  <div><label>description: </label>{{todo.description}}</div>
-  <div><label>estimate: </label>{{todo.estimate}}</div>
-  <div><label>in progress?: </label>{{todo.inProgress}}</div>
-</div>
+
+</li>
