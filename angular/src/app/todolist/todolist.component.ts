@@ -28,7 +28,6 @@ export class TodoListComponent implements OnInit {
     }
     onSelect(Todo: Todo) { console.log('selected: ' + Todo.description); this.selectedTodo = Todo; }
 
-    toggle(Todo: Todo) { console.log('toggled: ' + Todo.description); Todo.completed = !Todo.completed; }
 
 
 

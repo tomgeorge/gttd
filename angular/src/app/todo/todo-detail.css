@@ -20,6 +20,8 @@
     border: none; /* Mobile Safari */
     -webkit-appearance: none;
     appearance: none;
+    visibility: visible;
+    display: inline;
   }
 
   .toggle:after {

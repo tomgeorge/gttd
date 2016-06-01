@@ -1,5 +1,21 @@
 
-
-      <div><label>description: </label>{{todo.description}}</div>
-      <div><label>estimate: </label>{{todo.estimate}}</div>
-      <div><label>in progress?: </label>{{todo.inProgress}}</div>
+<div class="col m4">
+  <div class="card blue-grey darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">{{todo.name}}</span>
+      <p><label>description: </label>{{todo.description}}</p>
+      <p><label>estimate: </label>{{todo.estimate}}</p>
+      <p><label>in progress?: </label>{{todo.inProgress}}</p>
+    </div>
+    <div class="card-action">
+      <a *ngIf="todo.inProgress" class="waves-effect btn-flat"
+        (click)="pause(todo)">
+        <i class="material-icons">pause_circle_outline</i>
+      </a>
+      <a *ngIf="!todo.inProgress" class="waves-effect btn-flat"
+        (click)="setInProgress(todo)">
+        <i class="material-icons">play_circle_outline</i>
+      </a>
+    </div>
+  </div>
+</div>
