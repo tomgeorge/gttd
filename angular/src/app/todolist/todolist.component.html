@@ -3,9 +3,16 @@
 <input class="new-todo" placeholder="What needs to be done?" autofocus
     [(ngModel)]="newItem" (keyup.enter)="addItem()">
 <button class="add" (click)="addItem()">Add</button>
-<ul class="collapsible" data-collapsible="accordian">
-  <todo-detail *ngFor="#todo of Todos"
-    (click)="onSelect(todo)"
-    [todo]="todo">
-  </todo-detail>
+<ul materialize="collapsible" class="collapsible" data-collapsible="accordian">
+  <li *ngFor="#todo of Todos"
+    (click)="onSelect(todo)">
+    <div class="collapsible-header" >
+      <todo-summary [todo]="todo">
+      </todo-summary>
+    </div>
+    <div class="collapsible-body">
+    <todo-detail [todo]="todo">
+    </todo-detail>
+  </div>
+</li>
 </ul>

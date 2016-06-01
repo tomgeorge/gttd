@@ -2,12 +2,13 @@ import {Component, OnInit} from 'angular2/core';
 import {Todo} from '../todo/todo';
 import {TodoService} from '../todo/todo.service';
 import {TodoDetailComponent} from '../todo/todo-detail.component';
+import {TodoSummaryComponent} from '../todo/todo-summary.component';
 import '../todo/todo-detail.css';
 
 @Component({
     selector: 'my-todos',
     template: require('./todolist.component.html'),
-    directives: [TodoDetailComponent],
+    directives: [TodoDetailComponent, TodoSummaryComponent],
     providers: []
 })
 
