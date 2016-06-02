@@ -1,0 +1,16 @@
+---
+data:
+    build: .
+    dockerfile: docker/data/Dockerfile
+    command: echo 'ready'
+    volumes:
+       - .:/home/app
+       - /home/app/node_modules
+
+app:
+    build: .
+    dockerfile: docker/app/Dockerfile
+    volumes_from:
+        - data
+    ports:
+        - "8080:8080"
