@@ -6,6 +6,7 @@ import './todo.css';
     selector: 'todo-detail',
     template: require('./todo-detail.component.html')
 })
+
 export class TodoDetailComponent {
     @Input()
     todo: Todo;

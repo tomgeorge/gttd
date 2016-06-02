@@ -1,6 +1,3 @@
-import 'jquery';
-import 'hammerjs';
-import 'angular2-materialize';
 import 'materializecss';
 import 'materialize';
 import 'angular2/platform/browser';
@@ -11,3 +8,4 @@ import 'angular2/router';
 import 'angular2/http';
 import 'rxjs';
 import 'material-icons';
+import 'jquery';

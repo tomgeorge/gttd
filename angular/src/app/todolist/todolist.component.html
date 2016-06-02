@@ -1,8 +1,23 @@
 <h1>{{title}}</h1>
 <h2>My Todos</h2>
-<input class="new-todo" placeholder="What needs to be done?" autofocus
-    [(ngModel)]="newItem" (keyup.enter)="addItem()">
-<button class="add" (click)="addItem()">Add</button>
+<div class="row">
+    <form materialize class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input class="validate" type="text" placeholder="Enter a title" id="title"
+                [(ngModel)]="newItem" (keyup.enter)="addItem()">
+                <label for="title">Title</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="description" type="text" class="validate">
+                <label for="description">Enter a description</label>
+            </div>
+        </div>
+    </form>
+</div>
+<a class="waves-effect waves-light btn" (click)="addItem()">Add</a>
 <div class="s10 offset-s1 col">
 <div class="row">
 <todo-detail *ngFor="#todo of Todos"

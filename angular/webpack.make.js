@@ -79,9 +79,7 @@ module.exports = function makeWebpackConfig(options) {
 		extensions : ['', '.ts', '.js', '.webpack.js'],
 		alias : {
 			materializecss: 'materialize-css/dist/css/materialize.css',
-			materialize: 'materialize-css/dist/js/materialize.js',
-			jQuery: 'jquery',
-			$: 'jquery'
+			materialize: 'materialize-css/dist/js/materialize.js'
 		}
 	};
 
@@ -144,7 +142,7 @@ module.exports = function makeWebpackConfig(options) {
 			exclude : /node_modules|bower_components/
 		}, {
 			test : /materialize-css\/dist\/js\/materialize\.js/,
-			loader : 'imports?materializecss,$=jquery'
+			loader : 'imports?materializecss'
 		}, {
 			test: /materialize\.css$/, loader:
 			'style-loader!css-loader'
@@ -259,10 +257,7 @@ module.exports = function makeWebpackConfig(options) {
 		new webpack.ProvidePlugin({
 			$ : "jquery",
 			jQuery : "jquery",
-			jquery: 'jquery',
 			"window.jQuery": 'jquery',
-			"root.jQuery": 'jquery',
-			"Object.jQuery": 'jquery',
 			Hammer : 'hammerjs/hammer'
 		})
 	}
