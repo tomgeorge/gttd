@@ -13,7 +13,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
     selector: 'my-app',
     template: `
     <header>
-        <nav class="top-nav blue">
+        <nav class="top-nav">
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">{{title}}</a>
@@ -31,7 +31,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
             <router-outlet></router-outlet>
         </div>
     </main>
-    <footer class="page-footer blue">
+    <footer class="page-footer">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">

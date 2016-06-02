@@ -4,25 +4,32 @@
     <form materialize class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input class="validate" type="text" placeholder="Enter a title" id="title"
-                [(ngModel)]="newItem" (keyup.enter)="addItem()">
-                <label for="title">Title</label>
+              <i class="material-icons prefix">create</i>
+              <input id="title" type="text" class="validate"     autofocus>
+              <label for="title">Title</label>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
+          </div>
+          <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">create</i>
                 <input id="description" type="text" class="validate">
-                <label for="description">Enter a description</label>
-            </div>
-        </div>
+                <label for="description">Description</label>
+              </div>
+              <div class="input-field col s6">
+                  <input type="checkbox" id="inProgress" />
+                  <label for="inProgress">Item is in progress</label>
+              </div>
+          </div>
+          <div class="row">
+              <a class="waves-effect waves-light btn">Create todo item</a>
+          </div>
     </form>
 </div>
-<a class="waves-effect waves-light btn" (click)="addItem()">Add</a>
 <div class="s10 offset-s1 col">
-<div class="row">
-<todo-detail *ngFor="#todo of Todos"
-    (click)="onSelect(todo)"
-    [todo]="todo">
-</todo-detail>
-</div>
+    <div class="row">
+        <todo-detail *ngFor="#todo of Todos"
+        (click)="onSelect(todo)"
+        [todo]="todo">
+    </todo-detail>
+    </div>
 </div>
