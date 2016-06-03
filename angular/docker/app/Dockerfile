@@ -1,6 +1,10 @@
-FROM node:4.3.2
+FROM alpine:3.4
+MAINTAINER Tom George <tg82490@gmail.com>
 
-RUN useradd --user-group --create-home --shell /bin/false app
+RUN apk add --update nodejs \
+        && rm -rf /var/lib/apt/lists/*
+
+RUN adduser -S app
 
 ENV HOME=/home/app
 USER app

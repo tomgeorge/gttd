@@ -1,6 +1,7 @@
-FROM centos:7
+FROM alpine:3.4
 
-RUN useradd --user-group --create-home --shell /bin/bash mongodb
+RUN addgroup -S mongodb
+RUN adduser -S mongodb
 
 RUN mkdir -p /data/db /data/configdb \
     && chown -R mongodb:mongodb /data/db /data/configdb
