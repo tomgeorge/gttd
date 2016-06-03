@@ -1,18 +1,30 @@
-FROM node:4.3.2
+FROM node:4.4.5
+MAINTAINER Tom George <tg82490@gmail.com>
 
-RUN useradd --user-group --create-home --shell /bin/false app && \
-        npm install --global npm
+ENV HOME /home/app
 
-ENV HOME=/home/app
+RUN useradd -Ums /bin/false app 
 
-ADD typings.json $HOME/typings.json
-ADD package.json $HOME/package.json
-RUN chown -R app:app $HOME/*
+RUN npm install -g npm
 
-RUN cd $HOME && npm install
+RUN npm config set tmp /tmp 
 
+ADD typings.json /tmp/typings.json
+ADD package.json /tmp/package.json
+
+WORKDIR /tmp
+
+RUN npm config set registry https://registry.npmjs.org
+RUN npm install 
+RUN cp -a /tmp/node_modules $HOME 
+RUN npm config set tmp $HOME
 ADD . $HOME
 
-USER app
 WORKDIR $HOME
-VOLUME ["/home/app"]
+RUN npm run typings install
+RUN chown -R app:app $HOME/*
+
+USER app
+VOLUME ["/home/app", "/home/app/node_modules", "/home/app/typings"]
+
+CMD ["echo", "Created node data container"]
