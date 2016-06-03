@@ -2,10 +2,8 @@
 data:
     build: .
     dockerfile: docker/data/Dockerfile
-    command: echo 'Created node development data volume'
     volumes:
        - .:/home/app
-       - /home/app/node_modules
 
 app:
     build: .
