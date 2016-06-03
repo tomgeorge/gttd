@@ -1,12 +1,8 @@
-FROM alpine:3.4
+FROM node:4.4.5
 MAINTAINER Tom George <tg82490@gmail.com>
 
-RUN apk add --update nodejs \
-        && rm -rf /var/lib/apt/lists/*
-
-RUN adduser -S app
-
-ENV HOME=/home/app
+RUN useradd -Ums /bin/false app
+ENV HOME /home/app
 USER app
-WORKDIR /home/app
+WORKDIR $HOME
 CMD ["npm", "run", "dev"]
