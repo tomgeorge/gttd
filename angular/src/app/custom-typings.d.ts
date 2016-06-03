@@ -33,7 +33,7 @@ import * as _ from 'lodash'
 // Extra variables that live on Global that will be replaced by webpack DefinePlugin
 declare var ENV: string;
 declare var HMR: boolean;
-declare function require(string): any;
+// declare function require(string): any;
 interface GlobalEnvironment {
   ENV: string;
   HMR: boolean;

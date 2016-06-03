@@ -1,0 +1,32 @@
+---
+data:
+    build: .
+    dockerfile: docker/data/Dockerfile
+    volumes:
+       - .:/home/app
+
+app:
+    build: .
+    dockerfile: docker/app/Dockerfile
+    volumes_from:
+        - data
+    ports:
+        - "8080:8080"
+    links:
+        - mongo:mongo
+        - redis:redis
+
+mongodata:
+    build: .
+    dockerfile: docker/mongo_data/Dockerfile
+
+mongo:
+    image: mongo:3.2.6
+    volumes_from:
+        - mongodata
+    ports:
+        - "27017:27017"
+    command: --smallfiles --rest
+
+redis:
+    image: redis:3.2.0-alpine

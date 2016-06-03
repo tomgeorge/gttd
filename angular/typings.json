@@ -1,8 +1,13 @@
 {
 	"ambientDependencies": {
 		"es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
+		"express": "registry:dt/express#4.0.0+20160317120654",
+		"express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160602151406",
 		"jasmine": "registry:dt/jasmine#2.2.0+20160412134438",
 		"jquery": "registry:dt/jquery#1.10.0+20160417213236",
-		"moment": "registry:dt/moment#2.8.0+20160316155526"
+		"moment": "registry:dt/moment#2.8.0+20160316155526",
+		"mime": "registry:dt/mime#0.0.0+20160316155526",
+		"node": "registry:dt/node#6.0.0+20160602155235",
+		"serve-static": "registry:dt/serve-static#0.0.0+20160501131543"
 	}
 }
