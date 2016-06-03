@@ -1,4 +1,5 @@
 import {Component, Input} from 'angular2/core';
+import {moment} from 'moment';
 import {Todo} from './todo';
 import './todo.css';
 

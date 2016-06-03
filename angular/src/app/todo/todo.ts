@@ -6,4 +6,6 @@ export class Todo {
   time : number;
   estimate : number;
   completed : boolean;
+  startTime : number;
+  endTime : number;
 }

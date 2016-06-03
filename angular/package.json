@@ -76,6 +76,7 @@
     "jquery": "^2.2.3",
     "material-icons": "^0.1.0",
     "materialize-css": "^0.97.6",
+    "moment": "https://registry.npmjs.org/moment/-/moment-2.12.0.tgz",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.26",

@@ -36,7 +36,7 @@ declare var HMR: boolean;
 declare function require(string): any;
 interface GlobalEnvironment {
   ENV: string;
-  HMR: string;
+  HMR: boolean;
 }
 
 interface WebpackModule {

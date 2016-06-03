@@ -9,3 +9,4 @@ import 'angular2/http';
 import 'rxjs';
 import 'material-icons';
 import 'jquery';
+import 'moment';
