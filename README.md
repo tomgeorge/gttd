@@ -2,7 +2,7 @@ There's a bunch of notes at the bottom.
 
 # NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
-# Update 6/3/16:  The proxy at paychex is garbage and I have been having incredible amounts of trouble getting it to cooperate with npm, even our internal artifactory seems to break.  And due to the addition of the mongo container, the ability to run this locally (e.g. running npm run dev on windwos) might be hindered some of the code might break now that I have express routes that hit the mongo container.  You can probably get around this by installing mongo and redis locally and changing around the URLs in the code.  YMMV. #
+## Update 6/3/16:  The proxy at paychex is garbage and I have been having incredible amounts of trouble getting it to cooperate with npm, even our internal artifactory seems to break.  And due to the addition of the mongo container, the ability to run this locally (e.g. running npm run dev on windwos) might be hindered.  Some of the code might break now that I have express routes that hit the mongo container.  You can probably get around this by installing mongo and redis locally and changing around the URLs in the code.  YMMV. ##
 
 ## Running the docker compose setup ##
 
@@ -12,7 +12,7 @@ The docker compose environment contains:
 
 + A docker volume with the source code
 + A container running the webpack dev server with hot module reloading (changes are automatically pushed to the browser with no refresh required)
-+ A mongo container
++ A mongo container 
 + A redis container
 
 ** To build the setup **
