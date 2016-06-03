@@ -2,7 +2,7 @@ There's a bunch of notes at the bottom.
 
 # NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
-# Update 6/3/16:  The proxy at paychex is garbage and I have been having incredible amounts of trouble getting it to cooperate with npm, even our internal artifactory seems to break.  And due to the addition of the mongo container, the ability to run this locally (e.g. running npm run dev on windwos) might be hindered some of the code might break now that I have express routes that hit the mongo container.  You can probably get around this by installing mongo and redis locally and changing around the URLs in the code.  YMMV. #
+## Update 6/3/16:  The proxy at paychex is garbage and I have been having incredible amounts of trouble getting it to cooperate with npm, even our internal artifactory seems to break.  And due to the addition of the mongo container, the ability to run this locally (e.g. running npm run dev on windwos) might be hindered.  Some of the code might break now that I have express routes that hit the mongo container.  You can probably get around this by installing mongo and redis locally and changing around the URLs in the code.  YMMV. ##
 
 ## Running the docker compose setup ##
 
@@ -15,7 +15,7 @@ The docker compose environment contains:
 + A mongo container
 + A redis container
 
-** To build the setup **
+## To build the setup ##
 
 `cd <the place you cloned the repo>`
 
@@ -25,7 +25,7 @@ The data container will take the longest to build, because it has to do an `npm 
 
 `docker-compose up`  from the vagrant box.  Because $pwd is mapped to /home/app in the container, you can now navigate to localhost:8080 and type changes IN THE VAGRANT host, and see it pushed to the container.  
 
-**  I want to edit in windows and see the changes on the container **
+##  I want to edit in windows and see the changes on the container ##
 
 I recommend installing [atom](http://atom.io) and the [remote-sync](https://github.com/yongkangchen/remote-sync) plugin for it.
 
