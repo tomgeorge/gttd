@@ -12,10 +12,10 @@ The docker compose environment contains:
 
 + A docker volume with the source code
 + A container running the webpack dev server with hot module reloading (changes are automatically pushed to the browser with no refresh required)
-+ A mongo container 
++ A mongo container
 + A redis container
 
-** To build the setup **
+## To build the setup ##
 
 `cd <the place you cloned the repo>`
 
