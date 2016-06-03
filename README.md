@@ -2,6 +2,36 @@ There's a bunch of notes at the bottom.
 
 # NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
+# Update 6/3/16:  The proxy at paychex is garbage and I have been having incredible amounts of trouble getting it to cooperate with npm, even our internal artifactory seems to break.  And due to the addition of the mongo container, the ability to run this locally (e.g. running npm run dev on windwos) might be hindered some of the code might break now that I have express routes that hit the mongo container.  You can probably get around this by installing mongo and redis locally and changing around the URLs in the code.  YMMV. #
+
+## Running the docker compose setup ##
+
+As of right now you have to clone the repo in the vagrant VM.  The synced folder solution hangs when trying to build the docker images.  Not sure why.  It's not a big problem, though, as you will see.
+
+The docker compose environment contains:
+
++ A docker volume with the source code
++ A container running the webpack dev server with hot module reloading (changes are automatically pushed to the browser with no refresh required)
++ A mongo container
++ A redis container
+
+** To build the setup **
+
+`cd <the place you cloned the repo>`
+
+`docker-compose build` from the vagrant box.
+
+The data container will take the longest to build, because it has to do an `npm install`.  Luckily it caches for subsequent runs, so if you don't change/add any packages, the build step will be fast.  You can also get away with `docker-compose restart` - ing the app container for most development tasks.  When you are ready to spin everything up, run
+
+`docker-compose up`  from the vagrant box.  Because $pwd is mapped to /home/app in the container, you can now navigate to localhost:8080 and type changes IN THE VAGRANT host, and see it pushed to the container.  
+
+**  I want to edit in windows and see the changes on the container **
+
+I recommend installing [atom](http://atom.io) and the [remote-sync](https://github.com/yongkangchen/remote-sync) plugin for it.
+
+If you right click the angular folder and hit 'remote sync' you should to be able to configre the host, port, and directories to sync.  You should then be able to make changes in Atom on windows and see the changes show up in the container on the vagrant guest.  Pretty snazzy!
+
+
 ## running locally ##
 
 If you're behind cntlm:
@@ -18,8 +48,6 @@ If you're behind cntlm:
 
 If `npm run dev` doesn't work right out of the gate, try adding `host: "0.0.0.0"` to the devServer config in `webpack.make.js`.
 
-Need to dockerize it still.  
-
 ## Angular ##
 
 `cd angular`
@@ -31,87 +59,3 @@ Need to dockerize it still.
 `npm run test` for tests
 
 `npm run build` to create minified (not yet I'm getting errors lol) version of the app.
-
-
-## Flash of Unstyled Content on webpack-dev-server loads ##
-
-This is because we `import` the css in the typescript files.  Styles aren't loaded until the javascript is finished.
-
-This does NOT happen on the `build` task.  It uses the [webpack extract-text plugin](https://github.com/webpack/extract-text-webpack-plugin) to put all of our styles into .css files.  I believe it can also chunk these files for async loading.  Not 100% sure though.
-
-
-## Directory structure ##
-
-Still in flux :)
-
-## Assorted notes ##
-
-testing:
-
-`npm run pretest`
-
-`mocha`
-
-Running:
-
-`http-server angular/resources/public`
-
-## TODO ##
-
-+ Upgrade git to 1.9 (looks like the default for `yum` is 1.8.something
-+ See if the following sequence goes off without a hitch after `vagrant up && vagrant ssh`
-    + `cd gttd`
-    + `npm install`
-    + `npm run compile && npm run pretest`
-	+ `mocha`
-	+ `http-server angular/resources/public`
-+ Build tool choice.  I read about webpack and haven't looked at grunt or gulp bc it seems like you can do everything and offers a lot of cool features
-	+ Turns all your stuff (html, css, images) into javascript modules. So you can do something like this:
-```
-import stylesheet from 'styles/my-styles.scss';
-console.log(stylesheet)
-=> "body{font-size:12px}"
-```
-
-+ Provides loaders/plugins to build all these modules:
-
-```
-{
-  // When you import a .ts file, parse it with Typescript
-  test: /\.ts/,
-  loader: 'typescript',
-},
-{
-  // When you encounter images, compress them with image-webpack (wrapper around imagemin)
-  // and then inline them as data64 URLs
-  test: /\.(png|jpg|svg)/,
-  loaders: ['url', 'image-webpack'],
-},
-{
-  // When you encounter SCSS files, parse them with node-sass, then pass autoprefixer on them
-  // then return the results as a string of CSS
-  test: /\.scss/,
-  loaders: ['css', 'autoprefixer', 'sass'],
-}
-
-```
-
-+ Lets you split the code up: code you dont need wont be brought over from server until you hit it with a page load or ajax or something.
-
-+ Use Google Closure compiler for dead code elimination *(This might not even be worth it)*
-
-http://www.npmjs.com/package/webpack-closure-compiler
-
-http://swannodette.github.io/2015/02/23/hello-google-closure-modules/
-
-http://blog.madewithlove.be/post/webpack-your-bags/
-
-https://mochajs.org/#assertions
-
-https://github.com/petehunt/webpack-howto
-
-https://medium.com/@preslavrachev/gulp-vs-grunt-why-one-why-the-other-f5d3b398edc4#.hm6yeff31
-
-http://www.jbrantly.com/typescript-and-webpack/
-
-http://jonnyreeves.co.uk/2015/hello-typescript-and-mocha/
