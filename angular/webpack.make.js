@@ -293,6 +293,11 @@ module.exports = function makeWebpackConfig(options) {
 		}
 	};
 
+    config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 1000
+    };
+
 	return config;
 };
 
