@@ -6,6 +6,7 @@
       <p><label>description: </label>{{todo.description}}</p>
       <p><label>estimate: </label>{{todo.estimate}}</p>
       <p><label>in progress?: </label>{{todo.inProgress}}</p>
+      <p><label>Current Duration: </label>{{currentTimeSpent(todo)}}</p>
     </div>
     <div class="card-action">
       <a *ngIf="todo.inProgress" class="waves-effect btn-flat"

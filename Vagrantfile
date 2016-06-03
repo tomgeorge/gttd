@@ -38,5 +38,4 @@ Vagrant.configure(2) do |config|
 	  vb.memory = 2048
     #vb.gui = true
   end
-  config.vm.synced_folder "C:\\eclipse_workspaces\\gttd", "/home/vagrant/app"# , type: "rsync"
 end
