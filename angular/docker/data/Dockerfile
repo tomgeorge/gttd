@@ -21,7 +21,7 @@ RUN npm config set tmp $HOME
 ADD . $HOME
 
 WORKDIR $HOME
-RUN npm run typings install
+RUN npm run typings
 RUN chown -R app:app $HOME/*
 
 USER app

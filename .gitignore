@@ -13,3 +13,5 @@ node_modules/**/.deps/
 node_modules/**/build/Makefile
 node_modules/**/**/build/Makefile
 angularresources
+coverage/
+.npm/
