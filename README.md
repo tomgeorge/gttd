@@ -8,6 +8,8 @@ OR
 
 Install [atom](http://atom.io) and the [remote-sync](https://github.com/yongkangchen/remote-sync) plugin for it.  I used to use atom, I like VScode not.
 
+Configure aformentioned remote-sync plugin.  It's a good idea to exlucde `node_modules` and other ephemeral directories (dist, coverage, etc.) from the sync.
+
 `vagrant up && vagrant ssh`
 
 `tmux -2` if you so desire for multiple panes.
