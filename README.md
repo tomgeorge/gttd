@@ -14,6 +14,8 @@ Configure aformentioned remote-sync plugin.  It's a good idea to exlucde `node_m
 
 `tmux -2` if you so desire for multiple panes.
 
+`git clone https://github.com/tomgeorge/gttd && cd gttd/angular`
+
 `docker-compose build` if you haven't built the images yet or you changed something in package.json/webpack.config.js
 
 `docker-compose up`
