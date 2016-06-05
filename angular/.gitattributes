@@ -1,5 +1,5 @@
-vscode/* eol=crlf
-* text auto
-* text eol=lf
-
-
+* text=auto
+*.ts text
+*.js text
+*.txt text
+*.json text
