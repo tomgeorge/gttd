@@ -5,4 +5,5 @@ RUN useradd -Ums /bin/false app
 ENV HOME /home/app
 USER app
 WORKDIR $HOME
+
 CMD ["npm", "run", "server"]
