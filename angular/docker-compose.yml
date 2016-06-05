@@ -7,7 +7,7 @@ data:
 
 app:
     build: .
-    dockerfile: docker/app/Dockerfile
+    dockerfile: docker/app/dev/Dockerfile
     volumes_from:
         - data
     ports:
@@ -15,6 +15,12 @@ app:
     links:
         - mongo:mongo
         - redis:redis
+
+test:
+    build: .
+    dockerfile: docker/app/test/Dockerfile
+    volumes_from:
+        - data
 
 mongodata:
     build: .
