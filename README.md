@@ -11,7 +11,8 @@ As of right now you have to clone the repo in the vagrant VM.  The synced folder
 The docker compose environment contains:
 
 + A docker volume with the source code
-+ A container running the webpack dev server with hot module reloading (changes are automatically pushed to the browser with no refresh required)
++ A container running the webpack dev server with hot module reloading (changes are automatically pushed to the browser with no refresh required) (serving on localhost:8080)
++ A container running tests in watch mode (runs tests in phantomjs.  You can also go open a browser to localhost:9876 and it will run the tests in that browser)
 + A mongo container
 + A redis container
 

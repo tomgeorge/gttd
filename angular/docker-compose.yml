@@ -21,6 +21,8 @@ test:
     dockerfile: docker/app/test/Dockerfile
     volumes_from:
         - data
+    ports:
+        - "9876:9876"
 
 mongodata:
     build: .

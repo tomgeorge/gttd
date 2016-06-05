@@ -15,5 +15,9 @@ describe('Api Service', () => {
   it('should ...', inject([ApiService], (api: ApiService) => {
     expect(api.title).toBe('Angular 2');
   }));
+  
+  it('should be two', () => {
+    expect(2).toBe(2);
+  });
 
 });
