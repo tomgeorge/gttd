@@ -9,7 +9,7 @@ import '../todo/todo-detail.css';
     selector: 'my-todos',
     template: require('./todolist.component.html'),
     directives: [TodoDetailComponent, TodoSummaryComponent],
-    providers: []
+    providers: [TodoService]
 })
 
 export class TodoListComponent implements OnInit {
@@ -17,10 +17,10 @@ export class TodoListComponent implements OnInit {
     Todos: Todo[];
     selectedTodo: Todo;
 
-    constructor(private _TodoService: TodoService)  { }
+    constructor(private TodoService: TodoService)  { }
 
     getTodos() {
-        this._TodoService.getTodos().then(Todos => this.Todos = Todos);
+        this.TodoService.getTodos().then(Todos => this.Todos = Todos);
     }
 
     ngOnInit () {

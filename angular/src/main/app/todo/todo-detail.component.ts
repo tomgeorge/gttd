@@ -5,7 +5,7 @@ import './todo.css';
 
 @Component({
     selector: 'todo-detail',
-    template: require('./todo-detail.component.html')
+    template: require('./todo-detail.component.html'),
 })
 
 export class TodoDetailComponent {

@@ -45,9 +45,9 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html#entry
    */
   config.entry = isTest ? {} : {
-    'polyfills': './src/polyfills.ts',
-    'vendor': './src/vendor.ts',
-    'app': './src/index.ts' // our angular app
+    'polyfills': './src/main/polyfills.ts',
+    'vendor': './src/main/vendor.ts',
+    'app': './src/main/index.ts' // our angular app
   };
 
   /**
@@ -71,8 +71,7 @@ module.exports = function makeWebpackConfig() {
     // only discover files that have those extensions
     extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
     alias: {
-      'app': 'src/app',
-      'common': 'src/common',
+      'app': 'src/main/app',
       materializecss: 'materialize-css/dist/css/materialize.css',
       materialize: 'materialize-css/dist/js/materialize.js',
     }
@@ -100,7 +99,7 @@ module.exports = function makeWebpackConfig() {
             2502  // 2502 -> Referenced directly or indirectly
           ]
         },
-        exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
+        exclude: [isTest ? /\.(e2e)\.ts$/ : /test/, /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
 
       // copy those assets to output
@@ -148,7 +147,7 @@ module.exports = function makeWebpackConfig() {
     // instrument only testing sources with Istanbul, covers ts files
     config.module.postLoaders.push({
       test: /\.ts$/,
-      include: path.resolve('src'),
+      include: path.resolve('src/main'),
       loader: 'istanbul-instrumenter-loader',
       exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
     });
@@ -191,7 +190,7 @@ module.exports = function makeWebpackConfig() {
       // Inject script and link tags into html files
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: './src/main/index.html',
         chunksSortMode: 'dependency'
       }),
 

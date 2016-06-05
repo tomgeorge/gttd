@@ -8,6 +8,4 @@ export class Todo {
   completed: boolean;
   startTime: number;
   endTime: number;
-
-
 }
