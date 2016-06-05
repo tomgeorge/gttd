@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
 import {Todo} from './todo';
 import './todo.css';
@@ -22,7 +22,6 @@ export class TodoDetailComponent {
       Todo.inProgress = false;
       let now = moment;
       console.log(now.duration(Todo.time).milliseconds());
-      var b: number = Date.now();
       Todo.time = Todo.time + Date.now() - Todo.startTime;
       console.log('Todo.time: ' + this.currentTimeSpent(Todo));
       // Todo.time.add(now.subtract(moment.duration(Todo.startTime)));
@@ -34,7 +33,7 @@ export class TodoDetailComponent {
       Todo.startTime = Date.now();
     }
 
-    public currentTimeSpent(Todo: Todo) : string {
+    public currentTimeSpent(Todo: Todo): string {
       return this.convertMillisecondsToDigitalClock(Todo.time).clock;
     }
 
@@ -46,7 +45,7 @@ export class TodoDetailComponent {
         hours : hours,
         minutes : minutes,
         seconds : seconds,
-        clock : hours + ":" + minutes + ":" + seconds
+        clock : hours + ':' + minutes + ':' + seconds
     };
   }
 

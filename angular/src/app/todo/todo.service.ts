@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Todo} from './todo';
 import {TODOS} from './mock-todos';
 
@@ -9,7 +9,7 @@ export class TodoService {
     }
     getTodosSlowly() {
         return new Promise<Todo[]>(resolve =>
-            setTimeout(()=>resolve(TODOS), 2000)
+            setTimeout(() => resolve(TODOS), 2000)
         );
     }
 }

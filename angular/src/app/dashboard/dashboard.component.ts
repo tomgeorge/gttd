@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero/hero';
 import { HeroService } from '../hero/hero.service';
 
@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
     constructor(private _heroService: HeroService) { }
     ngOnInit() {
       this._heroService.getHeroes()
-        .then(heroes => this.heroes = heroes.slice(1,5));
+        .then(heroes => this.heroes = heroes.slice(1, 5));
     }
-    gotoDetail(){ /* not implemented yet */}
+    gotoDetail() { /* not implemented yet */ }
  }

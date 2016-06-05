@@ -1,12 +1,11 @@
-import { Component, AfterViewInit, Directive}       from 'angular2/core';
+import { Component }       from '@angular/core';
 import { HeroService }     from './hero/hero.service';
 import { HeroesComponent } from './hero/heroes.component';
 import { TodoService }     from './todo/todo.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TodoListComponent } from './todolist/todolist.component';
 import {TodoDetailComponent} from './todo/todo-detail.component';
-import { MaterializeDirective } from 'angular2-materialize';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 
 @Component({
@@ -56,7 +55,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
             </div>
           </div>
         </footer>
-	`,
+    `,
     directives: [ROUTER_DIRECTIVES, TodoDetailComponent, TodoListComponent],
     providers: [ROUTER_PROVIDERS,
         HeroService,
@@ -84,6 +83,6 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
 ])
 
 export class AppComponent {
-
+    url = 'https://github.com/preboot/angular2-webpack';
     title = 'Is YOUR world a whirlwind of clutter?';
 }

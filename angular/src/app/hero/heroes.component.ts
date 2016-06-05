@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {Hero} from './hero';
 import {HeroService} from './hero.service';
 import {HeroDetailComponent} from './hero-detail.component';
@@ -13,8 +13,8 @@ import './hero.css';
 })
 
 export class HeroesComponent implements OnInit {
-    title : 'Tour of Heroes';
-    heroes : Hero[];
+    title: 'Tour of Heroes';
+    heroes: Hero[];
     selectedHero: Hero;
 
     constructor(private _heroService: HeroService)  { }
