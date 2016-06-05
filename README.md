@@ -1,5 +1,24 @@
 There's a bunch of notes at the bottom.
 
+## tl;dr (docker-compose setup with dev server, test runner, code coverage, mongo, redis) and Remote sync from windows host -> vagrant -> container(s) ##
+
+Install [Visual Studio Code](code.visualstudio.com) and the [remote-sync](https://github.com/lukasz-wronski/vscode-ftp-sync) plugin.
+
+OR
+
+Install [atom](http://atom.io) and the [remote-sync](https://github.com/yongkangchen/remote-sync) plugin for it.  I used to use atom, I like VScode not.
+
+`vagrant up && vagrant ssh`
+
+`tmux -2` if you so desire for multiple panes.
+
+`docker-compose build` if you haven't built the images yet or you changed something in package.json/webpack.config.js
+
+`docker-compose up`
+
+Enjoy.
+
+
 # NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
 ## Update 6/3/16:  The proxy at paychex is garbage and I have been having incredible amounts of trouble getting it to cooperate with npm, even our internal artifactory seems to break.  And due to the addition of the mongo container, the ability to run this locally (e.g. running npm run dev on windwos) might be hindered.  Some of the code might break now that I have express routes that hit the mongo container.  You can probably get around this by installing mongo and redis locally and changing around the URLs in the code.  YMMV. ##
