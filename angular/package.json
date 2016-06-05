@@ -43,6 +43,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.3.2",
+    "browser-sync": "^2.12.12",
+    "browser-sync-webpack-plugin": "^1.0.3",
     "codelyzer": "0.0.19",
     "copy-webpack-plugin": "^3.0.0",
     "css-loader": "^0.23.0",

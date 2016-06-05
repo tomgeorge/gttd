@@ -8,6 +8,7 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 /**
  * Env
@@ -197,8 +198,14 @@ module.exports = function makeWebpackConfig() {
       // Extract css files
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd})
-    );
+      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd}),
+      
+      new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 8080,
+      server: { baseDir: ['dist'] }
+      })
+    )
   }
 
   // Add build specific plugins
@@ -219,7 +226,6 @@ module.exports = function makeWebpackConfig() {
         // Todo: remove this with beta 6
         mangle: false
       }),
-
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
