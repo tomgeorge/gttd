@@ -4,7 +4,8 @@ import { HeroesComponent } from './hero/heroes.component';
 import { TodoService }     from './todo/todo.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TodoListComponent } from './todolist/todolist.component';
-import {TodoDetailComponent} from './todo/todo-detail.component';
+import { TodoDetailComponent } from './todo/todo-detail.component';
+import { NotFoundComponent } from './notfound/notfound.component';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 
@@ -78,11 +79,23 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
         path: '/todos',
         name: 'Todos',
         component: TodoListComponent,
-        useAsDefault: true
+    },
+    {
+        path: '/',
+        redirectTo: ['Todos']
+    },
+    {
+        path: '/notfound',
+        name: 'NotFound',
+        component: NotFoundComponent
+    },
+    {
+        path: '/*path',
+        redirectTo: ['NotFound']
     }
 ])
 
 export class AppComponent {
     url = 'https://github.com/preboot/angular2-webpack';
-    title = 'Is YOUR world a whirlwind of clutter?';
+    title = 'Weiners';
 }
