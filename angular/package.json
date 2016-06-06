@@ -8,7 +8,7 @@
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile --colors",
     "build": "rimraf dist && webpack --progress --profile --bail --display-chunks --display-modules --colors",
-    "server": "webpack-dev-server --inline --progress --colors --host 0.0.0.0" ,
+    "server": "webpack-dev-server --inline --progress --colors --display-modules --history-api-fallback --host 0.0.0.0" ,
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tslint --force \"src/**/*.ts\"",
