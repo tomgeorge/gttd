@@ -36,3 +36,14 @@
     background: none;
     height: 40px;
   }
+
+ .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+  color: #212121;
+  margin-right: 20px;
+  transition: color .3s ease;
+  text-transform: uppercase;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
+  color: #bdbdbd ;
+}
