@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {Todo} from '../todo/todo';
+import {Todo} from '../todo/todo.builder';
 import {TodoService} from '../todo/todo.service';
 import {TodoDetailComponent} from '../todo/todo-detail.component';
 import {TodoSummaryComponent} from '../todo/todo-summary.component';
+import {MaterializeDirective} from 'angular2-materialize';
 import '../todo/todo-detail.css';
 
 @Component({
     selector: 'my-todos',
     template: require('./todolist.component.html'),
-    directives: [TodoDetailComponent, TodoSummaryComponent],
+    directives: [TodoDetailComponent, TodoSummaryComponent, MaterializeDirective],
     providers: [TodoService]
 })
 

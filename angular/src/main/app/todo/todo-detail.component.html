@@ -1,22 +1,36 @@
-
 <div class="col m4">
-  <div class="card blue-grey darken-1">
-    <div class="card-content white-text">
+  <div class="card grey lighten-3">
+    <div class="card-content grey-darken-4-text">
       <span class="card-title">{{todo.name}}</span>
       <p><label>description: </label>{{todo.description}}</p>
       <p><label>estimate: </label>{{todo.estimate}}</p>
       <p><label>in progress?: </label>{{todo.inProgress}}</p>
       <p><label>Current Duration: </label>{{currentTimeSpent(todo)}}</p>
     </div>
-    <div class="card-action">
-      <a *ngIf="todo.inProgress" class="waves-effect btn-flat"
-        (click)="pause(todo)">
+    <div class="card-action black-text">
+      <a *ngIf="todo.inProgress" class="waves-effect btn-flat" (click)="pause(todo)">
         <i class="material-icons">pause_circle_outline</i>
       </a>
-      <a *ngIf="!todo.inProgress" class="waves-effect btn-flat"
-        (click)="setInProgress(todo)">
+      <a *ngIf="!todo.inProgress" class="waves-effect btn-flat" (click)="setInProgress(todo)">
         <i class="material-icons">play_circle_outline</i>
       </a>
     </div>
   </div>
 </div>
+<!--
+<li>
+  <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{todo.name}}</div>
+  <div class="collapsible-body">
+    <p><label>description: </label></p>
+    <p><label>description: </label>{{todo.description}}</p>
+    <p><label>estimate: </label>{{todo.estimate}}</p>
+    <p><label>in progress?: </label>{{todo.inProgress}}</p>
+    <p><label>Current Duration: </label>{{currentTimeSpent(todo)}}</p>
+    <a *ngIf="todo.inProgress" class="waves-effect btn-flat" (click)="pause(todo)">
+      <i class="material-icons">pause_circle_outline</i>
+    </a>
+    <a *ngIf="!todo.inProgress" class="waves-effect btn-flat" (click)="setInProgress(todo)">
+      <i class="material-icons">play_circle_outline</i>
+    </a>
+  </div>
+</li>-->

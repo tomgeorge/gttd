@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
-import {Todo} from './todo';
+import {Todo} from './todo.builder';
 import './todo.css';
 
 @Component({

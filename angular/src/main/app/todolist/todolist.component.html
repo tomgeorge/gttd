@@ -4,32 +4,28 @@
     <form materialize class="col s12">
         <div class="row">
             <div class="input-field col s6">
-              <i class="material-icons prefix">create</i>
-              <input id="title" type="text" class="validate"     autofocus>
-              <label for="title">Title</label>
+                <i class="material-icons prefix">create</i>
+                <input id="title" type="text" class="validate" autofocus>
+                <label for="title">Title</label>
             </div>
-          </div>
-          <div class="row">
-              <div class="input-field col s6">
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <i class="material-icons prefix">create</i>
                 <input id="description" type="text" class="validate">
                 <label for="description">Description</label>
-              </div>
-              <div class="input-field col s6">
-                  <input type="checkbox" id="inProgress" />
-                  <label for="inProgress">Item is in progress</label>
-              </div>
-          </div>
-          <div class="row">
-              <a class="waves-effect waves-light btn">Create todo item</a>
-          </div>
+            </div>
+            <div class="input-field col s6">
+                <input type="checkbox" id="inProgress" />
+                <label for="inProgress">Item is in progress</label>
+            </div>
+        </div>
+        <div class="row">
+            <a class="waves-effect waves-light btn">Create todo item</a>
+        </div>
     </form>
 </div>
 <div class="s10 offset-s1 col">
-    <div class="row">
-        <todo-detail *ngFor="#todo of Todos"
-        (click)="onSelect(todo)"
-        [todo]="todo">
+    <todo-detail *ngFor="#todo of Todos" (click)="onSelect(todo)" [todo]="todo">
     </todo-detail>
-    </div>
 </div>
