@@ -104,11 +104,18 @@ module.exports = function makeWebpackConfig() {
 
       // copy those assets to output
       {test: /\.(jpe?g|gif|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
-      
-      { test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' },
+
+      { test: /.(png|woff(2)?|eot|ttf|svg|ico)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' },
 
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
+
+      {
+        test: /materialize-css\/dist\/js\/materialize\.js/,
+        loader: 'imports?materializecss'
+      },
+
+      { test: /materialize\.css$/,   loader: 'style-loader!css-loader' },
 
       // Support for CSS as raw text
       // use 'null' loader in test mode (https://github.com/webpack/null-loader)
@@ -131,13 +138,8 @@ module.exports = function makeWebpackConfig() {
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
       {test: /\.html$/, loader: 'raw'},
-      
-      { test: /\.styl$/, loader: 'style!css!stylus-loader' },
-      
-      { test: /materialize-css\/dist\/js\/materialize\.js/,
-        loader: 'imports?materializecss' },
-        
-      { test: /materialize\.css$/,   loader: 'style-loader!css-loader' },
+
+      { test: /\.styl$/, loader: 'style!css!stylus-loader' }
     ],
     postLoaders: [],
     noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
@@ -191,21 +193,25 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
         template: './src/main/index.html',
-        chunksSortMode: 'dependency'
+        chunksSortMode: 'dependency',
+        favicon: './resources/public/favicon.ico'
+      }),
+      new HtmlWebpackPlugin({
+        template: './resources/public/404.html',
+        filename: '404.html',
+        favicon: './resources/public/favicon.ico'
       }),
 
       // Extract css files
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd}),
-      
-      new BrowserSyncPlugin({
+      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd})
+
+      /*new BrowserSyncPlugin({
       host: 'localhost',
       port: 8080,
       server: { baseDir: ['dist'] }
-      })
-    )
-  }
+  })*/)}
 
   // Add build specific plugins
   if (isProd) {
@@ -228,7 +234,7 @@ module.exports = function makeWebpackConfig() {
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
-        from: root('public')
+        from: root('resources/public')
       }]),
       new webpack.ProvidePlugin({
           $: "jquery",
