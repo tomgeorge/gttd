@@ -1,6 +1,12 @@
-import {Todo} from './todo';
+import { Todo, TodoBuilder } from './todo.builder';
 
 export var TODOS: Todo[] = [
+    new TodoBuilder()
+    .setId(5)
+    .setName('api server')
+    .setDescription('make an express api server')
+    .setInProgress(false)
+    .build(),
    { 'id': 1, 'name': 'set up var/lib/machine-name/docker nfs mounts',
    'description': `
         look at ansible galaxy plugin for this. exports file, fstab entries. install etcd/run docker image, just one master for now`
@@ -13,20 +19,20 @@ export var TODOS: Todo[] = [
         'inProgress': false, 'time': 0, estimate: 0, completed: false, startTime : 0, endTime : 0},
    { 'id': 3, 'name': 'Project: Security',
    'description': `
-        set up openvpn container.  external load balances that proxies to kube api server for cluster access.  
+        set up openvpn container.  external load balances that proxies to kube api server for cluster access.
         firewall rules.  disable password login.  read about SElinux.  read about PAM.
         `,
         'inProgress': false, 'time': 0, estimate: 0, completed: false, startTime : 0, endTime : 0},
    { 'id': 4, 'name': 'Project: Cluster set-up',
      'description': `
-        set up chat server.  figure out how to do mixed-architecture deployments so I can run a jenkins server on the 
+        set up chat server.  figure out how to do mixed-architecture deployments so I can run a jenkins server on the
         beefier vagrant machines.  Create a secret.  Create a configmap.  Make a volume claim on nfs
         `,
         'inProgress': true, 'time': 0, estimate: 0, completed: false, startTime : 0, endTime : 0},
    { 'id': 5, 'name': 'Project: to-do app',
      'description': `
-        what needs to be done to be able to edit on host, [see change in browser on vagrant box | see change in browser in docker 
-        container ip].  How will this run?  using node command?  nginx serves static bundle(s)?  
+        what needs to be done to be able to edit on host, [see change in browser on vagrant box | see change in browser in docker
+        container ip].  How will this run?  using node command?  nginx serves static bundle(s)?
         Generate tasks for authentication/authorization.  Set up a mongo container for this.  Set up a redux store.
         `,
         'inProgress': false, 'time': 0, estimate: 0, completed: false, startTime : 0, endTime : 0},
