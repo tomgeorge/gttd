@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Todo} from '../todo/todo.builder';
+import {TodoBuilder} from '../todo/todo.builder';
 import {TodoService} from '../todo/todo.service';
 import {TodoDetailComponent} from '../todo/todo-detail.component';
 import {TodoSummaryComponent} from '../todo/todo-summary.component';
@@ -17,7 +18,9 @@ export class TodoListComponent implements OnInit {
     title: 'Tour of Todos';
     Todos: Todo[];
     selectedTodo: Todo;
-
+    newTodo: Todo = new TodoBuilder().build();
+    submitted = false;
+    
     constructor(private TodoService: TodoService)  { }
 
     getTodos() {
@@ -29,7 +32,9 @@ export class TodoListComponent implements OnInit {
     }
     onSelect(Todo: Todo) { console.log('selected: ' + Todo.description); this.selectedTodo = Todo; }
 
-
+    onSubmit() { 
+        this.TodoService.addTodo(this.newTodo);
+    }
 
 
 }

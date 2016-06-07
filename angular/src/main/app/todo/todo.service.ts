@@ -12,4 +12,7 @@ export class TodoService {
             setTimeout(() => resolve(TODOS), 2000)
         );
     }
+    addTodo(todo: Todo) {
+        TODOS.concat(todo);
+    }
 }
