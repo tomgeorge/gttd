@@ -24,7 +24,6 @@ export class TodoDetailComponent {
       console.log(now.duration(Todo.time).milliseconds());
       Todo.time = Todo.time + Date.now() - Todo.startTime;
       console.log('Todo.time: ' + this.currentTimeSpent(Todo));
-      // Todo.time.add(now.subtract(moment.duration(Todo.startTime)));
     }
 
     setInProgress(Todo: Todo) {
