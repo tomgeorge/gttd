@@ -8,7 +8,7 @@
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile --colors",
     "build": "rimraf dist && webpack --progress --profile --bail --display-chunks --display-modules --colors",
-    "server": "webpack-dev-server --inline --progress --colors --display-modules --history-api-fallback --host 0.0.0.0" ,
+    "server": "webpack-dev-server --inline --progress --colors --display-modules --history-api-fallback --host 0.0.0.0",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tslint --force \"src/**/*.ts\"",
@@ -37,6 +37,9 @@
     "materialize": "^1.0.0",
     "materialize-css": "^0.97.6",
     "moment": "^2.13.0",
+    "redux": "^3.4.0",
+    "redux-actions": "^0.9.1",
+    "redux-logger": "^2.6.1",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
     "zone.js": "0.6.12"
