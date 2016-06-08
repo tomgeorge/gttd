@@ -14,7 +14,7 @@ import {TODOS} from '../../../main/app/todo/mock-todos';
 describe('Todo Service', () => {
   let newTodo = new TodoBuilder().build();
   let serviceTodos: Todo[] = [];
-  
+
   let todosAfter: Todo[] = [
       ...TODOS,
       newTodo
@@ -22,16 +22,12 @@ describe('Todo Service', () => {
   beforeEachProviders(() => [TodoService]);
 
   it('should add a todo to the list', inject([TodoService], (service: TodoService) => {
-      service.addTodo(newTodo);
-      service.getTodos().then(Todos => {
-          console.log('heeeeeeeeyyyyyyyyyy' + Todos.map(t => t.name));
-          serviceTodos.concat(Todos);
-          console.log(serviceTodos.map(t=> t.name));
-      });
+    service.addTodo(newTodo);
+
     console.log('servicetodos' + serviceTodos.map(t=>t.name));
     expect(serviceTodos).toBe(todosAfter);
   }));
-  
+
   it('should be two', () => {
     expect(2).toBe(2);
   });
