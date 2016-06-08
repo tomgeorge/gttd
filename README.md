@@ -40,6 +40,7 @@ There's a bunch of notes at the bottom.
 
 
 ## tl;dr (docker-compose setup with dev server, test runner, code coverage, mongo, redis) and Remote sync from windows host -> vagrant -> container(s) <a name="tldr"></a> ##
+If you're doing this at Paychex on the network, good luck.  Let me know how you got it to work.  Your best bet is the guest network or home.
 
 Install [Visual Studio Code](code.visualstudio.com) and the [remote-sync](https://github.com/lukasz-wronski/vscode-ftp-sync) plugin.
 
