@@ -9,6 +9,7 @@
     "watch": "webpack --watch --progress --profile --colors",
     "build": "rimraf dist && webpack --progress --profile --bail --display-chunks --display-modules --colors",
     "server": "webpack-dev-server --inline --progress --colors --display-modules --history-api-fallback --host 0.0.0.0",
+    "dev": "webpack-dev-server --inline --progress --colors --display-modules --history-api-fallback --host 0.0.0.0" ,
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tslint --force \"src/**/*.ts\"",
@@ -20,7 +21,7 @@
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "npm run server",
-    "postinstall": "npm run webdriver-update && typings install",
+    "postinstall": "typings install",
     "typings": "typings install"
   },
   "dependencies": {
