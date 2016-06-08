@@ -1,40 +1,45 @@
----
-data:
-    build: .
-    dockerfile: docker/data/Dockerfile
-    volumes:
-       - .:/home/app
+version: '2'
+services:
+    data:
+        build:
+            context: .
+            dockerfile: docker/data/Dockerfile
+        volumes:
+        - .:/home/app
 
-app:
-    build: .
-    dockerfile: docker/app/dev/Dockerfile
-    volumes_from:
-        - data
-    ports:
-        - "8080:8080"
-    links:
-        - mongo:mongo
-        - redis:redis
+    app:
+        build:
+            context: .
+            dockerfile: docker/app/dev/Dockerfile
+        volumes_from:
+            - data
+        ports:
+            - "8080:8080"
+        links:
+            - mongo:mongo
+            - redis:redis
 
-test:
-    build: .
-    dockerfile: docker/app/test/Dockerfile
-    volumes_from:
-        - data
-    ports:
-        - "9876:9876"
+    test:
+        build:
+            context: .
+            dockerfile: docker/app/test/Dockerfile
+        volumes_from:
+            - data
+        ports:
+            - "9876:9876"
 
-mongodata:
-    build: .
-    dockerfile: docker/mongo_data/Dockerfile
+    mongodata:
+        build:
+            context: .
+            dockerfile: docker/mongo_data/Dockerfile
 
-mongo:
-    image: mongo:3.2.6
-    volumes_from:
-        - mongodata
-    ports:
-        - "27017:27017"
-    command: --smallfiles --rest
+    mongo:
+        image: mongo:3.2.6
+        volumes_from:
+            - mongodata
+        ports:
+            - "27017:27017"
+        command: --smallfiles --rest
 
-redis:
-    image: redis:3.2.0-alpine
+    redis:
+        image: redis:3.2.0-alpine
