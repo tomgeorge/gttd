@@ -90,7 +90,11 @@ The data container will take the longest to build, because it has to do an `npm 
 
 ##  I want to edit in windows and see the changes on the container <a name="magic"></a> ##
 
-I recommend installing [atom](http://atom.io) and the [remote-sync](https://github.com/yongkangchen/remote-sync) plugin for it.
+I recommend installing  [Visual Studio Code](code.visualstudio.com) and the [remote-sync](https://github.com/lukasz-wronski/vscode-ftp-sync) plugin.
+
+You could also do [atom](http://atom.io) and the [remote-sync](https://github.com/yongkangchen/remote-sync) plugin for it.
+
+Or sublime.
 
 If you right click the angular folder and hit 'remote sync' you should to be able to configre the host, port, and directories to sync.  You should then be able to make changes in Atom on windows and see the changes show up in the container on the vagrant guest.  Pretty snazzy!
 
