@@ -21,6 +21,14 @@
         "react",
         "coverage",
         "dist",
-        "doc"
+        "doc",
+        "public",
+        "LICENSE.txt",
+        "resources",
+        ".vagrant",
+        ""
+        
+
+
     ]
 }
