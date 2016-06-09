@@ -11,7 +11,7 @@ import '../todo/todo-detail.css';
     selector: 'my-todos',
     template: require('./todolist.component.html'),
     directives: [TodoDetailComponent, TodoSummaryComponent, MaterializeDirective],
-    providers: [TodoService]
+    providers: [TodoService],
 })
 
 export class TodoListComponent implements OnInit {
@@ -24,7 +24,8 @@ export class TodoListComponent implements OnInit {
     constructor(private TodoService: TodoService)  { }
 
     getTodos() {
-        this.TodoService.getTodos().then(Todos => this.Todos = Todos);
+        //this.TodoService.getTodos().then(Todos => this.Todos = Todos);
+        this.Todos = this.TodoService.getTodos();
     }
 
     ngOnInit () {
@@ -33,8 +34,10 @@ export class TodoListComponent implements OnInit {
     onSelect(Todo: Todo) { console.log('selected: ' + Todo.description); this.selectedTodo = Todo; }
 
     onSubmit() { 
+        console.log('Attempting to submit new todo: ' + this.newTodo.name );
         this.TodoService.addTodo(this.newTodo);
+        this.getTodos();
+        console.log('getTodos called: ' + this.Todos.map(t=> t.name));
     }
-
 
 }
