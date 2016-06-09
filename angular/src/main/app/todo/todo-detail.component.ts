@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
 import {Todo} from './todo.builder';
 import './todo.css';
+import { ConsoleLogService } from '../shared/console.log.service';
 
 @Component({
     selector: 'todo-detail',
@@ -9,25 +10,29 @@ import './todo.css';
 })
 
 export class TodoDetailComponent {
+
+    constructor(private logger: ConsoleLogService) {}
+    
+
     @Input()
     todo: Todo;
 
     toggle(Todo: Todo) {
-      console.log('toggled: ' + Todo.description);
+      this.logger.log('toggled: ' + Todo.description);
       Todo.completed = !Todo.completed;
     }
 
     pause(Todo: Todo) {
-      console.log('Paused: ' + Todo.name);
+      this.logger.log('Paused: ' + Todo.name);
       Todo.inProgress = false;
       let now = moment;
-      console.log(now.duration(Todo.time).milliseconds());
+      this.logger.log(now.duration(Todo.time).milliseconds());
       Todo.time = Todo.time + Date.now() - Todo.startTime;
-      console.log('Todo.time: ' + this.currentTimeSpent(Todo));
+      this.logger.log('Todo.time: ' + this.currentTimeSpent(Todo));
     }
 
     setInProgress(Todo: Todo) {
-      console.log('Played: ' + Todo.name);
+      this.logger.log('Played: ' + Todo.name);
       Todo.inProgress = true;
       Todo.startTime = Date.now();
     }

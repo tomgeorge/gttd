@@ -5,7 +5,9 @@ import {TodoService} from '../todo/todo.service';
 import {TodoDetailComponent} from '../todo/todo-detail.component';
 import {TodoSummaryComponent} from '../todo/todo-summary.component';
 import {MaterializeDirective} from 'angular2-materialize';
+import { ConsoleLogService } from '../shared/console.log.service';
 import '../todo/todo-detail.css';
+
 
 @Component({
     selector: 'my-todos',
@@ -16,25 +18,37 @@ import '../todo/todo-detail.css';
 
 export class TodoListComponent implements OnInit {
     title: 'Tour of Todos';
+
     Todos: Todo[];
+
     selectedTodo: Todo;
-    newTodo: Todo = new TodoBuilder().build();
-    submitted = false;
-    
-    constructor(private TodoService: TodoService)  { }
+
+    newTodo: Todo = new TodoBuilder()
+    .setName('')
+    .setDescription('')
+    .build();
+
+    submitted: boolean  = false;
+
+    constructor(private TodoService: TodoService, private logger: ConsoleLogService)  {
+
+     }
 
     getTodos() {
-        this.TodoService.getTodos().then(Todos => this.Todos = Todos);
+        this.TodoService
+        .getTodos()
+        .then(Todos => this.Todos = Todos);
     }
 
     ngOnInit () {
         this.getTodos();
     }
-    onSelect(Todo: Todo) { console.log('selected: ' + Todo.description); this.selectedTodo = Todo; }
-
-    onSubmit() { 
-        this.TodoService.addTodo(this.newTodo);
+    onSelect(Todo: Todo) {
+        this.logger.log('selected: ' + Todo.description);
+        this.selectedTodo = Todo;
     }
 
-
+    onSubmit() {
+        this.TodoService.addTodo(this.newTodo);
+    }
 }

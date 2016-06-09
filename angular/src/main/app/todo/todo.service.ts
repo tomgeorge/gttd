@@ -7,11 +7,13 @@ export class TodoService {
     getTodos() {
         return Promise.resolve(TODOS);
     }
+
     getTodosSlowly() {
         return new Promise<Todo[]>(resolve =>
             setTimeout(() => resolve(TODOS), 2000)
         );
     }
+
     addTodo(todo: Todo) {
         TODOS.concat(todo);
     }
