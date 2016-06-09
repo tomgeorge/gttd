@@ -39,7 +39,7 @@ echo "Installing global node dependencies"
 echo "**************************************"
 
 # clone
-# git clone https://github.com/tomgeorge/gttd || true
+git clone https://github.com/tomgeorge/gttd || true
 # cd gttd/angular && rm -rf node_modules && npm install
 
 # docker compose

@@ -1,9 +1,9 @@
 import * as Redux from 'redux';
-const {createStore, applyMiddleware, compose} = Redux;
+const {createStore, applyMiddleware, compose } = Redux;
 const thunk = require('redux-thunk').default;
 import reducer from '../reducers/index';
 
-const enhancers = [];
+const enhancers: any = [];
 
 if (window.devToolsExtension) {
   enhancers.push(window.devToolsExtension());
