@@ -13,7 +13,7 @@ import '../todo/todo-detail.css';
     selector: 'my-todos',
     template: require('./todolist.component.html'),
     directives: [TodoDetailComponent, TodoSummaryComponent, MaterializeDirective],
-    providers: [TodoService]
+    providers: [TodoService],
 })
 
 export class TodoListComponent implements OnInit {
@@ -30,9 +30,7 @@ export class TodoListComponent implements OnInit {
 
     submitted: boolean  = false;
 
-    constructor(private TodoService: TodoService, private logger: ConsoleLogService)  {
-
-     }
+    constructor(private TodoService: TodoService, private logger: ConsoleLogService)  { }
 
     getTodos() {
         this.TodoService
@@ -48,7 +46,10 @@ export class TodoListComponent implements OnInit {
         this.selectedTodo = Todo;
     }
 
+
     onSubmit() {
         this.TodoService.addTodo(this.newTodo);
+        this.getTodos();
+        this.logger.log('getTodos called: ' + this.Todos.map(t=> t.name));
     }
 }
