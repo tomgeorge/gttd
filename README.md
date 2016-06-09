@@ -1,10 +1,12 @@
 There's a bunch of notes at the bottom.
 
 # Table of Contents
-1. [I don't want to read this how do I run the app](#tldr)
-2. [Enhancements](#enhancements)
+1. [Stuff to work on](#enhancements)
+2. [I don't want to read this how do I run the app](#tldr)
+3. [Configure VSCode](#configurevscode)
 3. [The Docker Compose setup](#dockercompose)
 4. [I want to edit in windows and see the changes on the container](#magic)
+5. [Configure VSCode](#configurevscode)
 
 
 ## Enhancements: <a name="enhancements"></a> ##
@@ -42,7 +44,7 @@ There's a bunch of notes at the bottom.
     + [How do I sign a key?](https://github.com/dwyl/hapi-auth-jwt2/issues/48)
 
 
-## tl;dr (docker-compose setup with dev server, test runner, code coverage, mongo, redis) and Remote sync from windows host -> vagrant -> container(s) <a name="tldr"></a> ##
+## 2. I don't want to read this how do I run the app (docker-compose setup with dev server, test runner, code coverage, mongo, redis) and Remote sync from windows host -> vagrant -> container(s) <a name="tldr"></a> ##
 If you're doing this at Paychex on the network, good luck.  Let me know how you got it to work.  Your best bet is the guest network or home.
 
 Install [Visual Studio Code](code.visualstudio.com) and the [remote-sync](https://github.com/lukasz-wronski/vscode-ftp-sync) plugin.
@@ -65,6 +67,8 @@ Configure aformentioned remote-sync plugin.  It's a good idea to exlucde `node_m
 
 Enjoy.
 
+
+## 3. Configure Visual Studio Code<a name="configurevscode"></a>
 
 # NOTE: npm doesn't support cygwin anymore.  If you're running this on Windows, I would stick to straight git bash. #
 
