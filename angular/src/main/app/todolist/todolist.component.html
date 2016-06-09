@@ -25,11 +25,11 @@
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn"
-            (click)="onSubmit()">Create todo item</a>
+            (click)="onSubmit(todo)">Create todo item</a>
         </div>
     </form>
 </div>
 <div class="s10 offset-s1 col">
-    <todo-detail *ngFor="#todo of Todos" (click)="onSelect(todo)" [todo]="todo">
+    <todo-detail *ngFor="#todo of Todos" (click)="onSelect()" [todo]="todo">
     </todo-detail>
 </div>
