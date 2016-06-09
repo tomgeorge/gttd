@@ -13,6 +13,9 @@ There's a bunch of notes at the bottom.
 
 + redux to hold application state
     + [Redux website](http://reduxjs.org)
+    + [Video: Live React: Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs)
+    + [Video Series: Getting started with redux](https://egghead.io/courses/getting-started-with-redux)
+    + [Video Series: Building react applications with idiomatic redux](https://egghead.io/courses/building-react-applications-with-idiomatic-redux)
     + [Medium article with intro to redux](https://medium.com/google-developer-experts/angular-2-introduction-to-redux-1cf18af27e6e#.7ijzqhpim)
     + [Flux standard actions (standard for defining the shape of an action](https://github.com/acdlite/flux-standard-action)
     + [redux-rx library (allow use of observables with redux)](https://github.com/acdlite/redux-rx)
