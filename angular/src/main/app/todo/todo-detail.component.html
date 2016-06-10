@@ -1,6 +1,9 @@
 <div class="col m4">
   <div class="card grey lighten-3">
     <div class="card-content grey-darken-4-text">
+      <a class="waves-effect btn-flag text-align: right" (click)="delete()">
+        <i class="material-icons text-align: right">clear</i>
+      </a>
       <span class="card-title">{{todo.name}}</span>
       <p><label>description: </label>{{todo.description}}</p>
       <p><label>estimate: </label>{{todo.estimate}}</p>

@@ -36,7 +36,6 @@ export class TodoListComponent implements OnInit {
                 this.logger.log('grabbed todos' + this.Todos);
             },
             error => this.errorMessage = <any>error);
-        
     }
 
     onSelect(todo: Todo) {
@@ -45,6 +44,7 @@ export class TodoListComponent implements OnInit {
     }
 
     createTodo(todo: Todo) {
+        this.logger.log('todo passed to create ' + todo.description);
         if (!todo) {
             return; 
         }
@@ -63,6 +63,16 @@ export class TodoListComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
+    delete(todo: Todo) {
+        this.logger.log(todo.name);
+        this.TodoService.delete(todo)
+        .subscribe(
+            () => {
+                this.logger.log(`subscribe on delete`)
+                this.Todos = this.Todos.filter( t=> t.id !== todo.id);
+        });
+    }
+
     ngOnInit() {
         this.getTodos();
     }
@@ -73,4 +83,5 @@ export class TodoListComponent implements OnInit {
             console.log('currentMax ' + currentMax);
             return ++currentMax;
     }
+    
 }
