@@ -1,11 +1,13 @@
 There's a bunch of notes at the bottom.
 
 # Table of Contents
-1. [Stuff to work on](#enhancements)
+1. [Stuff to work on/Links](#enhancements)
 2. [I don't want to read this how do I run the app](#tldr)
 3. [Start the vagrant box](#vagrant)
 4. [Configure VSCode](#configurevscode)
 5. [The Docker Compose setup](#dockercompose)
+6. [Installing a node module in the container without rebuilding the data volume](#install_module_in_container)
+7. [Debug a running node app by attaching a container to it](#debug)
 
 
 ## Enhancements: <a name="enhancements"></a> ##
@@ -41,6 +43,14 @@ There's a bunch of notes at the bottom.
     + [learn jwt](https://github.com/docdis/learn-json-web-tokens)
     + [Build your Angular 2 App: From Auth to calling an API](https://auth0.com/blog/2015/05/14/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/)
     + [How do I sign a key?](https://github.com/dwyl/hapi-auth-jwt2/issues/48)
+
++ Observables
+    + [The Introduction to Reactive Programming You've Been Missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
+    + [Angular HTTP tutorial (uses promises)](https://angular.io/docs/ts/latest/tutorial/toh-pt6.html)
+    + [Angular HTTP Client in Developer Guide](https://angular.io/docs/ts/latest/guide/server-communication.html)
+    + [Auth0 blog - using http](https://auth0.com/blog/2015/10/15/angular-2-series-part-3-using-http/)
+    + [Reactive Extensions (rxjs) github](https://github.com/Reactive-Extensions/RxJS)
+
 
 
 ## 2. I don't want to read this how do I run the app (docker-compose setup with dev server, test runner, code coverage, mongo, redis) and Remote sync from windows host -> vagrant -> container(s) <a name="tldr"></a> ##
@@ -154,7 +164,56 @@ The data container will take the longest to build, because it has to do an `npm 
 `docker-compose up`  
 
 
+## 6. Installing a node module in the container without rebuilding the data volume<a name="install_module_in_container"></a>
 
+
+`docker ps`
+
+You should see something like this:
+
+    CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                      NAMES
+    95d7592a81e7        angular_app          "npm run dev"            4 hours ago         Up About a minute   0.0.0.0:8080->8080/tcp     angular_app_1
+    7e7af2c2ed17        angular_test         "npm run test"           4 hours ago         Up About a minute   0.0.0.0:9876->9876/tcp     angular_test_1
+    90f9dbbf76ba        mongo:3.2.6          "/entrypoint.sh --sma"   18 hours ago        Up 2 hours          0.0.0.0:27017->27017/tcp   angular_mongo_1
+    5d167589a5c8        redis:3.2.0-alpine   "docker-entrypoint.sh"   18 hours ago        Up 2 hours          6379/tcp                   angular_redis_1
+
+You can attach to the dev or test container, because they both use the `node_modules` volume defined in the data volume.
+
+`docker exec -it angular_app_1 /bin/bash`
+
+This will execute the command `/bin/bash` in the container and keep you in interactive mode with a TTY attached (the `-it` flags).  You should see a prompt with the container id:
+
+`app@95d7592a81e7:~$`
+
+Then you can 
+
+`app@95d7592a81e7:~$ npm install <module>`
+
+If you restart the containers you should see the module now.  
+
+`docker-compose restart app`
+
+`docker-compose restart test`
+
+If you want intellisense et al. then you need to install the module on your Windows host.
+
+
+## 7. Debug a running node app by attaching a container to it<a name="debug"></a>
+
+I ran into an issue where I wanted to add some logging to a 3rd party node application.  I ran a container that had vi and some other convenience utilities on it, and linked the data volume.
+
+    vagrant@vagrant-ubuntu-trusty-64:~/gttd/angular/node_modules$ docker ps -a | grep data
+    2cf1c1ec1efa        tomgeorge/devbox     "--link=data:angular_"   9 hours ago         Created                                                 happy_babbage
+    f052a83b82bc        tomgeorge/devbox     "--link data:angular_"   9 hours ago         Created                                                 pensive_bohr
+    ad1598efbdef        angular_data         "echo 'Created node d"   13 hours ago        Exited (0) 13 hours ago                                 angular_data_1
+    b1eb4fcacf3a        angular_mongodata    "echo 'Created mongod"   13 hours ago        Exited (0) 13 hours ago                                 angular_mongodata_1
+
+
+You have to add the -a flag because a volume container exists immiediately after creating the volume.  You can see I already have the `tomgeorge/devbox` container linked to the data container.  You can make one of these easy by creating a Dockerfile that installs vim or emacs.  To get that working, run 
+
+`docker run --volumes-from <container id of volume> -it tomgeorge/devbox /bin/bash`
+
+Then you can cd to `/home/vagrant/app/node_modules` and edit the javascript files in `node_modules`.
 
 ## <span class="strong">OUTDATED:</span> running locally ##
 

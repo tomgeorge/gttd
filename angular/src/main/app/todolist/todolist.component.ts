@@ -18,38 +18,59 @@ import '../todo/todo-detail.css';
 
 export class TodoListComponent implements OnInit {
     title: 'Tour of Todos';
-
+    errorMessage: string;
     Todos: Todo[];
-
     selectedTodo: Todo;
+    pendingTodo: Todo = new TodoBuilder().build();
 
-    newTodo: Todo = new TodoBuilder()
-    .setName('')
-    .setDescription('')
-    .build();
+    submitted: boolean = false;
 
-    submitted: boolean  = false;
-
-    constructor(private TodoService: TodoService, private logger: ConsoleLogService)  { }
+    constructor(private TodoService: TodoService, private logger: ConsoleLogService) { }
 
     getTodos() {
         this.TodoService
-        .getTodos()
-        .then(Todos => this.Todos = Todos);
+            .getTodos()
+            .subscribe(
+            todos => {
+                this.Todos = todos;
+                this.logger.log('grabbed todos' + this.Todos);
+            },
+            error => this.errorMessage = <any>error);
+        
     }
 
-    ngOnInit () {
+    onSelect(todo: Todo) {
+        this.logger.log('selected: ' + todo.description);
+        this.selectedTodo = todo;
+    }
+
+    createTodo(todo: Todo) {
+        if (!todo) {
+            return; 
+        }
+
+        this.logger.log('create ' + todo.name);
+        // ew
+        todo.id = this.getNextId()
+        this.TodoService.createTodo(todo)
+            .subscribe(
+            t => {
+                this.logger.log('next thing in the stream is ' + typeof(t));
+                this.Todos.push(t);
+                this.logger.log('todos after create' + this.Todos
+                    .map(t => '[' + t.name + '], '));
+            }, 
+            error => this.errorMessage = <any>error);
+    }
+
+    ngOnInit() {
         this.getTodos();
     }
-    onSelect(Todo: Todo) {
-        this.logger.log('selected: ' + Todo.description);
-        this.selectedTodo = Todo;
-    }
 
-
-    onSubmit() {
-        this.TodoService.addTodo(this.newTodo);
-        this.getTodos();
-        this.logger.log('getTodos called: ' + this.Todos.map(t=> t.name));
+    /* GARBAGE */
+    getNextId(): number {
+            let currentMax: number =  Math.max(...(this.Todos.map(t => t.id)));
+            console.log('currentMax ' + currentMax);
+            return ++currentMax;
     }
 }
