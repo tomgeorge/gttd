@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 import * as moment from 'moment';
 import {Todo, TodoBuilder} from './todo.builder';
@@ -16,7 +16,9 @@ export class TodoDetailComponent {
   @Input()
   todo: Todo;
   error: any;
-  navigated = false;
+
+  @Output()
+  deleted = new EventEmitter<Todo>();
 
   constructor(
     private logger: ConsoleLogService,
@@ -41,6 +43,11 @@ export class TodoDetailComponent {
     this.logger.log('Played: ' + Todo.name);
     Todo.inProgress = true;
     Todo.startTime = Date.now();
+  }
+
+  delete() {
+    this.logger.log('delete');
+    this.deleted.emit(this.todo);
   }
 
   public currentTimeSpent(Todo: Todo): string {

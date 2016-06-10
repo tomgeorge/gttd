@@ -14,7 +14,6 @@ export class TodoService {
     constructor(private http: Http, private logger: ConsoleLogService) { }
 
     getTodos(): Observable<Todo[]> {
-        this.logger.log('hi mom');
         return this.http.get(this.todoUrl)
             .map(response => response.json().data)
             .catch(this.handleError);
@@ -65,7 +64,9 @@ export class TodoService {
 
         return this.http
             .delete(url, { headers: headers })
-            .catch(this.handleError);
+            .map((response: Response) => {
+                this.logger.log(`del response ${JSON.stringify(response)}`);
+            })
     }
 
     save(todo: Todo): Observable<Todo> {
