@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: "apt-get purge lxc-docker"
   config.vm.provision "shell", inline: "apt-get update"
   config.vm.provision "shell", inline: "apt-get install docker-engine"
-  config.vm.provision "shell", inline: "service docker start"
+  config.vm.provision "shell", inline: "service docker restart"
 
   # forward port 8080
   config.vm.network "forwarded_port", guest: 8080, host: 8080
@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
   # a public network if you want to ssh into the box or hit the app from your phone.
   # make sure the ip is on your subnet (10.0.1.0/24, 192.168.0.0/24, whatever your
   # host IP/gateway looks like )
-  config.vm.network "public_network", ip: "10.0.1.210"
+  # config.vm.network "public_network", ip: "10.0.1.211"
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
 	  vb.memory = 2048

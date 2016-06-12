@@ -5,36 +5,77 @@ import {TodoService} from '../todo/todo.service';
 import {TodoDetailComponent} from '../todo/todo-detail.component';
 import {TodoSummaryComponent} from '../todo/todo-summary.component';
 import {MaterializeDirective} from 'angular2-materialize';
+import { ConsoleLogService } from '../shared/console.log.service';
 import '../todo/todo-detail.css';
+
 
 @Component({
     selector: 'my-todos',
     template: require('./todolist.component.html'),
     directives: [TodoDetailComponent, TodoSummaryComponent, MaterializeDirective],
-    providers: [TodoService]
+    providers: [TodoService],
 })
 
 export class TodoListComponent implements OnInit {
     title: 'Tour of Todos';
+    errorMessage: string;
     Todos: Todo[];
-    selectedTodo: Todo;
-    newTodo: Todo = new TodoBuilder().build();
-    submitted = false;
-    
-    constructor(private TodoService: TodoService)  { }
+    pendingTodo: Todo = new TodoBuilder().build();
+
+    submitted: boolean = false;
+
+    constructor(private TodoService: TodoService, private logger: ConsoleLogService) { }
 
     getTodos() {
-        this.TodoService.getTodos().then(Todos => this.Todos = Todos);
+        this.TodoService
+            .getTodos()
+            .subscribe(
+            todos => {
+                this.Todos = todos;
+                this.logger.log('grabbed todos' + this.Todos);
+            },
+            error => this.errorMessage = <any>error);
     }
 
-    ngOnInit () {
+    createTodo(todo: Todo) {
+        this.logger.log('todo passed to create ' + todo.description);
+        if (!todo) {
+            return; 
+        }
+
+        this.logger.log('create ' + todo.name);
+        // ew
+        todo.id = this.getNextId()
+        this.TodoService.createTodo(todo)
+            .subscribe(
+            t => {
+                this.logger.log('next thing in the stream is ' + typeof(t));
+                this.Todos.push(t);
+                this.logger.log('todos after create' + this.Todos
+                    .map(t => '[' + t.name + '], '));
+            }, 
+            error => this.errorMessage = <any>error);
+    }
+
+    delete(todo: Todo) {
+        this.logger.log(todo.name);
+        this.TodoService.delete(todo)
+        .subscribe(
+            () => {
+                this.logger.log(`subscribe on delete`)
+                this.Todos = this.Todos.filter( t=> t.id !== todo.id);
+        });
+    }
+
+    ngOnInit() {
         this.getTodos();
     }
-    onSelect(Todo: Todo) { console.log('selected: ' + Todo.description); this.selectedTodo = Todo; }
 
-    onSubmit() { 
-        this.TodoService.addTodo(this.newTodo);
+    /* GARBAGE */
+    getNextId(): number {
+            let currentMax: number =  Math.max(...(this.Todos.map(t => t.id)));
+            console.log('currentMax ' + currentMax);
+            return ++currentMax;
     }
-
-
+    
 }

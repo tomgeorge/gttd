@@ -1,10 +1,9 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-
-    "typescript.tsdk": "C:/Users/Tom/AppData/Roaming/npm/node_modules/typescript/lib",
+    "typescript.tsdk": "C:/Users/tgeorge/AppData/Roaming/npm/node_modules/typescript/lib",
 
     // Complete functions with their parameter signature.
-    "typescript.useCodeSnippetsOnMethodSuggest": false,
+    "typescript.useCodeSnippetsOnMethodSuggest": true,
 
     // Enable / disable TypeScript validation
     "typescript.validate.enable": true,
@@ -38,5 +37,4 @@
 
     // Defines whether an open brace is put onto a new line for control blocks or not
     "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false
-
 }
