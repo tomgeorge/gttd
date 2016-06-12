@@ -16,6 +16,7 @@ export class TodoDetailComponent {
   @Input()
   todo: Todo;
   error: any;
+  selectedTodo: Todo;
 
   @Output()
   deleted = new EventEmitter<Todo>();
@@ -48,6 +49,11 @@ export class TodoDetailComponent {
   delete() {
     this.logger.log('delete');
     this.deleted.emit(this.todo);
+  }
+
+  onSelect(todo: Todo) {
+    this.selectedTodo = todo;
+    this.logger.log(`selected todo name ${this.selectedTodo.name}`);
   }
 
   public currentTimeSpent(Todo: Todo): string {

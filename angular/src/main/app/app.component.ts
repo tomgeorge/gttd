@@ -7,6 +7,11 @@ import { TodoListComponent } from './todolist/todolist.component';
 import { TodoDetailComponent } from './todo/todo-detail.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { NgRedux, select } from 'ng2-redux';
+import { RootState } from './store/configureStore';
+import rootReducer from './reducers/index';
+
+const createLogger = require('redux-logger');
 
 
 @Component({
@@ -96,6 +101,16 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 ])
 
 export class AppComponent {
+
+    constructor(private ngRedux: NgRedux<RootState>) {
+        this.ngRedux.configureStore(
+            rootReducer,
+            { todos: [] }, 
+            [ createLogger() ],
+            enhancers
+        );
+    }
+    
     url = 'https://github.com/preboot/angular2-webpack';
     title = 'Weiners';
 }

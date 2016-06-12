@@ -20,7 +20,6 @@ export class TodoListComponent implements OnInit {
     title: 'Tour of Todos';
     errorMessage: string;
     Todos: Todo[];
-    selectedTodo: Todo;
     pendingTodo: Todo = new TodoBuilder().build();
 
     submitted: boolean = false;
@@ -36,11 +35,6 @@ export class TodoListComponent implements OnInit {
                 this.logger.log('grabbed todos' + this.Todos);
             },
             error => this.errorMessage = <any>error);
-    }
-
-    onSelect(todo: Todo) {
-        this.logger.log('selected: ' + todo.description);
-        this.selectedTodo = todo;
     }
 
     createTodo(todo: Todo) {

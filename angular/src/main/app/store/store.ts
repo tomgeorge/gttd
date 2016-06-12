@@ -1,16 +1,17 @@
 import * as Redux from 'redux';
+import { Todo } from '../todo/todo.builder';
 const {createStore, applyMiddleware, compose } = Redux;
 const thunk = require('redux-thunk').default;
 import reducer from '../reducers/index';
 
-const enhancers: any = [];
+export const enhancers: any = [];
 
 if (window.devToolsExtension) {
   enhancers.push(window.devToolsExtension());
 }
 
 export interface RootState {
-  counter: number;
+  todos: Todo[];
 }
 
 const finalCreateStore = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
@@ -19,5 +20,5 @@ const finalCreateStore = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
 )(createStore);
 
 export default () => {
-  return finalCreateStore(reducer, {counter:0} as RootState);
+  return finalCreateStore(reducer, {todos: []} as RootState);
 }

@@ -1,5 +1,5 @@
 <div class="col m4">
-  <div class="card grey lighten-3">
+  <div class="card grey lighten-3" (click)="onSelect(todo)">
     <div class="card-content grey-darken-4-text">
       <a class="waves-effect btn-flag text-align: right" (click)="delete()">
         <i class="material-icons text-align: right">clear</i>
@@ -20,20 +20,3 @@
     </div>
   </div>
 </div>
-<!--
-<li>
-  <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{todo.name}}</div>
-  <div class="collapsible-body">
-    <p><label>description: </label></p>
-    <p><label>description: </label>{{todo.description}}</p>
-    <p><label>estimate: </label>{{todo.estimate}}</p>
-    <p><label>in progress?: </label>{{todo.inProgress}}</p>
-    <p><label>Current Duration: </label>{{currentTimeSpent(todo)}}</p>
-    <a *ngIf="todo.inProgress" class="waves-effect btn-flat" (click)="pause(todo)">
-      <i class="material-icons">pause_circle_outline</i>
-    </a>
-    <a *ngIf="!todo.inProgress" class="waves-effect btn-flat" (click)="setInProgress(todo)">
-      <i class="material-icons">play_circle_outline</i>
-    </a>
-  </div>
-</li>-->

@@ -65,7 +65,7 @@ export class TodoService {
         return this.http
             .delete(url, { headers: headers })
             .map((response: Response) => {
-                this.logger.log(`del response ${JSON.stringify(response)}`);
+                this.logger.log(`del response ${JSON.stringify(response.headers)}`);
             })
     }
 

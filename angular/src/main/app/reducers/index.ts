@@ -1,6 +1,6 @@
 import * as Redux from 'redux';
 const { combineReducers } = Redux;
-import { RootState } from '../store/configureStore';
+import { RootState } from '../store/store';
 
 
 const rootReducer = combineReducers<RootState>({
