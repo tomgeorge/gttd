@@ -9,6 +9,7 @@ RUN npm install -g npm
 
 RUN npm config set tmp /tmp 
 
+ADD typings.json /tmp/typings.json
 ADD package.json /tmp/package.json
 
 WORKDIR /tmp
@@ -20,9 +21,10 @@ RUN npm config set tmp $HOME
 ADD . $HOME
 
 WORKDIR $HOME
+RUN npm run typings
 RUN chown -R api:api $HOME/*
 
-USER app
-VOLUME ["/home/api", "/home/api/node_modules"]
+USER api
+VOLUME ["/home/api", "/home/api/node_modules", "/home/api/typings"]
 
 CMD ["echo", "Created api data container"]

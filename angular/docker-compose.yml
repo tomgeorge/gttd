@@ -5,10 +5,10 @@ services:
             context: ./api
             dockerfile: docker/api/data/Dockerfile
         volumes:
-           - .:/home/api
+           - ./api:/home/api
     api:
        build:  
-           context: .
+           context: ./api
            dockerfile: docker/api/api/Dockerfile
        ports:
            - "3000:3000"
