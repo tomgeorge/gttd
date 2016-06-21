@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 import * as moment from 'moment';
-import {Todo, TodoBuilder} from './todo.builder';
+import { Todo } from './todo.builder';
 import {TodoService} from './todo.service';
 import './todo.css';
 import { ConsoleLogService } from '../shared/console.log.service';

@@ -21,4 +21,3 @@ bootstrap(AppComponent, [
   provide(ConsoleLogService, {useClass: ConsoleLogService}),
   provide(XHRBackend, {useClass: InMemoryBackendService}),
   provide(SEED_DATA, {useClass: InMemoryDataService})]);
- 

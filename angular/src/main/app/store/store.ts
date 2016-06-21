@@ -1,8 +1,8 @@
 import * as Redux from 'redux';
-import { Todo } from '../todo/todo.builder';
-const {createStore, applyMiddleware, compose } = Redux;
-const thunk = require('redux-thunk').default;
+import { ITodos } from '../reducers/todos';
+const {combineReducers, createStore, applyMiddleware, compose } = Redux;
 import reducer from '../reducers/index';
+const logger = require('redux-logger').createLogger;
 
 export const enhancers: any = [];
 
@@ -10,15 +10,6 @@ if (window.devToolsExtension) {
   enhancers.push(window.devToolsExtension());
 }
 
-export interface RootState {
-  todos: Todo[];
-}
-
-const finalCreateStore = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
-  applyMiddleware(thunk),
-  ...enhancers
-)(createStore);
-
-export default () => {
-  return finalCreateStore(reducer, {todos: []} as RootState);
+export interface IAppState {
+  todos?: ITodos;
 }

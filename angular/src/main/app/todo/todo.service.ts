@@ -19,9 +19,9 @@ export class TodoService {
             .catch(this.handleError);
     }
 
-    getTodo(id: number) : Observable<Todo> {
+    getTodo(id: number): Observable<Todo> {
         return this.getTodos()
-        .reduce((acc, value) => value.filter( t => t.id == id),
+        .reduce((acc, value) => value.filter( t => t.id === id),
         []
         )[0];
     }
@@ -32,7 +32,7 @@ export class TodoService {
         });
         let body = JSON.stringify(todo);
         let options = new RequestOptions({ headers: headers });
-        this.logger.log(`headers: [${JSON.stringify(headers)}] body: ${body}`)
+        this.logger.log(`headers: [${JSON.stringify(headers)}] body: ${body}`);
         return this.http
             .post(this.todoUrl, body, options)
             .map(response => {
@@ -66,7 +66,7 @@ export class TodoService {
             .delete(url, { headers: headers })
             .map((response: Response) => {
                 this.logger.log(`del response ${JSON.stringify(response.headers)}`);
-            })
+            });
     }
 
     save(todo: Todo): Observable<Todo> {
@@ -78,14 +78,6 @@ export class TodoService {
 
     createTodo(todo: Todo): Observable<Todo> {
         return this.post(todo);
-    }
-
-
-    private extractData(response: Response) {
-        this.logger.log('extractData()');
-        let body = response.json();
-        this.logger.log(`response body: ${body}`);
-        return body.data || { };
     }
 
     private handleError(error: any) {

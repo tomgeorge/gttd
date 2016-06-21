@@ -1,10 +1,13 @@
 import * as Redux from 'redux';
 const { combineReducers } = Redux;
-import { RootState } from '../store/store';
+import { ITodos, todosReducer } from './todos';
 
+export interface IAppState {
+  todos?: ITodos;
+};
 
-const rootReducer = combineReducers<RootState>({
-
+const rootReducer = combineReducers<IAppState>({
+    todos: todosReducer
 });
 
 export default rootReducer;

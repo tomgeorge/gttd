@@ -7,8 +7,8 @@ import { TodoListComponent } from './todolist/todolist.component';
 import { TodoDetailComponent } from './todo/todo-detail.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
-import { NgRedux, select } from 'ng2-redux';
-import { RootState } from './store/configureStore';
+import { NgRedux } from 'ng2-redux';
+import { IAppState, enhancers } from './store/store';
 import rootReducer from './reducers/index';
 
 const createLogger = require('redux-logger');
@@ -102,15 +102,16 @@ const createLogger = require('redux-logger');
 
 export class AppComponent {
 
-    constructor(private ngRedux: NgRedux<RootState>) {
+    url = 'https://github.com/preboot/angular2-webpack';
+    title = 'Weiners';
+
+    constructor(
+        private ngRedux: NgRedux<IAppState>) {
         this.ngRedux.configureStore(
             rootReducer,
-            { todos: [] }, 
+            { },
             [ createLogger() ],
             enhancers
         );
     }
-    
-    url = 'https://github.com/preboot/angular2-webpack';
-    title = 'Weiners';
 }
