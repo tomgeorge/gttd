@@ -51,6 +51,8 @@
     "gulp": "^3.9.1",
     "gulp-debug": "^2.1.2",
     "gulp-inject": "^4.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.1.0",
     "gulp-notify": "^2.2.0",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
