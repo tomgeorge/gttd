@@ -1,20 +1,20 @@
 <div class="col m4">
-  <div class="card grey lighten-3">
+  <div class="card hoverable waves-effect waves-block grey lighten-3">
     <div class="card-content grey-darken-4-text">
       <a class="waves-effect btn-flag text-align: right" (click)="delete()">
         <i class="material-icons text-align: right">clear</i>
       </a>
       <span class="card-title">{{todo.name}}</span>
       <p><label>description: </label>{{todo.description}}</p>
-      <p><label>estimate: </label>{{todo.estimate}}</p>
-      <p><label>in progress?: </label>{{todo.inProgress}}</p>
-      <p><label>Current Duration: </label>{{currentTimeSpent(todo)}}</p>
+      <p><label *ngIf="todo.inProgress">In Progress</label></p>
+      <p><label *ngIf="!todo.inProgress">Not Started</label></p>
+      <p><label>Time Spent: </label>{{currentTimeSpent(todo)}}</p>
     </div>
     <div class="card-action black-text">
       <a *ngIf="todo.inProgress" class="waves-effect btn-flat" (click)="pause(todo)">
         <i class="material-icons">pause_circle_outline</i>
       </a>
-      <a *ngIf="!todo.inProgress" class="waves-effect btn-flat" (click)="setInProgress(todo)">
+      <a *ngIf="!todo.inProgress" class="waves-effect  btn-large btn-flat" (click)="setInProgress(todo)">
         <i class="material-icons">play_circle_outline</i>
       </a>
     </div>

@@ -97,5 +97,5 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 
 export class AppComponent {
     url = 'https://github.com/preboot/angular2-webpack';
-    title = 'Weiners';
+    title = 'Bob';
 }
