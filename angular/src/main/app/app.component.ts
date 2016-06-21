@@ -103,7 +103,7 @@ const createLogger = require('redux-logger');
 export class AppComponent {
 
     url = 'https://github.com/preboot/angular2-webpack';
-    title = 'Weiners';
+    title = 'Todosssss';
 
     constructor(
         private ngRedux: NgRedux<IAppState>) {
