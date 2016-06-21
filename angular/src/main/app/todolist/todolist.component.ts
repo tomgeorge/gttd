@@ -20,9 +20,7 @@ export class TodoListComponent implements OnInit {
     title: 'Tour of Todos';
     errorMessage: string;
     Todos: Todo[];
-    selectedTodo: Todo;
     pendingTodo: Todo = new TodoBuilder().build();
-
     submitted: boolean = false;
 
     constructor(private TodoService: TodoService, private logger: ConsoleLogService) { }
@@ -38,28 +36,23 @@ export class TodoListComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
-    onSelect(todo: Todo) {
-        this.logger.log('selected: ' + todo.description);
-        this.selectedTodo = todo;
-    }
-
     createTodo(todo: Todo) {
         this.logger.log('todo passed to create ' + todo.description);
         if (!todo) {
-            return; 
+            return;
         }
 
         this.logger.log('create ' + todo.name);
         // ew
-        todo.id = this.getNextId()
+        todo.id = this.getNextId();
         this.TodoService.createTodo(todo)
             .subscribe(
             t => {
                 this.logger.log('next thing in the stream is ' + typeof(t));
                 this.Todos.push(t);
                 this.logger.log('todos after create' + this.Todos
-                    .map(t => '[' + t.name + '], '));
-            }, 
+                    .map(f => '[' + f.name + '], '));
+            },
             error => this.errorMessage = <any>error);
     }
 
@@ -68,8 +61,8 @@ export class TodoListComponent implements OnInit {
         this.TodoService.delete(todo)
         .subscribe(
             () => {
-                this.logger.log(`subscribe on delete`)
-                this.Todos = this.Todos.filter( t=> t.id !== todo.id);
+                this.logger.log(`subscribe on delete`);
+                this.Todos = this.Todos.filter( t => t.id !== todo.id);
         });
     }
 
@@ -83,5 +76,4 @@ export class TodoListComponent implements OnInit {
             console.log('currentMax ' + currentMax);
             return ++currentMax;
     }
-    
 }

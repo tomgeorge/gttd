@@ -7,7 +7,7 @@ import {
 } from '@angular/core/testing';
 import { provide } from '@angular/core'
 import { TodoService } from '../../../main/app/todo/todo.service';
-import { Http, HTTP_PROVIDERS, XHRBackend } from '@angular/http';
+import { Http, HTTP_PROVIDERS, XHRBackend, ConnectionBackend } from '@angular/http';
 import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
 import { InMemoryDataService } from '../../../main/app/shared/in-memory-data.service';
 import { Todo, TodoBuilder } from '../../../main/app/todo/todo.builder';
@@ -22,8 +22,9 @@ describe('Todo Service', () => {
     TodoService,
     HTTP_PROVIDERS,
     ConsoleLogService,
-    Http,
     InMemoryDataService,
+    Http,
+    provide(ConnectionBackend, {useClass: InMemoryBackendService}),
     provide(XHRBackend, { useClass: InMemoryBackendService }),
     provide(SEED_DATA, { useClass: InMemoryDataService })]);
 
@@ -40,7 +41,9 @@ describe('Todo Service', () => {
 
   it('should add a todo to the list', inject([
     TodoService,
-    XHRBackend
+    XHRBackend,
+    ConnectionBackend,
+    HTTP_PROVIDERS
     ],
     (service: TodoService,
      mockBackend: InMemoryDataService ) => {

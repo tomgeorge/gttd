@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "public_network", ip: "10.0.1.211"
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-	  vb.memory = 2048
+	  vb.memory = 4096
     #vb.gui = true
   end
 end

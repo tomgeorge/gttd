@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 import * as moment from 'moment';
-import {Todo, TodoBuilder} from './todo.builder';
+import { Todo } from './todo.builder';
 import {TodoService} from './todo.service';
 import './todo.css';
 import { ConsoleLogService } from '../shared/console.log.service';
@@ -16,6 +16,7 @@ export class TodoDetailComponent {
   @Input()
   todo: Todo;
   error: any;
+  selectedTodo: Todo;
 
   @Output()
   deleted = new EventEmitter<Todo>();
@@ -48,6 +49,11 @@ export class TodoDetailComponent {
   delete() {
     this.logger.log('delete');
     this.deleted.emit(this.todo);
+  }
+
+  onSelect(todo: Todo) {
+    this.selectedTodo = todo;
+    this.logger.log(`selected todo name ${this.selectedTodo.name}`);
   }
 
   public currentTimeSpent(Todo: Todo): string {

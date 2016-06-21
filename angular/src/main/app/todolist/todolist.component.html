@@ -30,8 +30,8 @@
     </form>
 </div>
 <div class="s10 offset-s1 col" *ngFor="let todo of Todos">
-    <todo-detail (click)="onSelect(todo)" 
-    (deleted)="delete($event)" 
+    <todo-detail 
+    (deleted)="delete($event)"
     [todo]="todo">
     </todo-detail>
 </div>

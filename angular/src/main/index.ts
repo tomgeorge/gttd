@@ -8,6 +8,7 @@ import { InMemoryDataService } from './app/shared/in-memory-data.service';
 import { enableProdMode, provide } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { ConsoleLogService } from './app/shared/console.log.service';
+import { NgRedux } from 'ng2-redux';
 
 if (process.env.ENV === 'production') {
   enableProdMode();
@@ -16,6 +17,7 @@ if (process.env.ENV === 'production') {
 
 bootstrap(AppComponent, [
   HTTP_PROVIDERS,
+  NgRedux,
   provide(ConsoleLogService, {useClass: ConsoleLogService}),
   provide(XHRBackend, {useClass: InMemoryBackendService}),
   provide(SEED_DATA, {useClass: InMemoryDataService})]);
