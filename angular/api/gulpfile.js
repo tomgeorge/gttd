@@ -75,16 +75,15 @@ gulp.task('watch', function() {
     gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts']);
 });
 
-gulp.task('serve', ['ts-lint', 'compile-ts'], function () {
+gulp.task('serve', ['compile-ts'], function () {
     livereload.listen();
-//    gulp.watch('./src/**/*.ts', ['compile-ts']);
+    gulp.watch('./src/**/*.ts', ['compile-ts']);
 
     nodemon({
         script: './dist/src/main/api/index.js'
     }).on('restart', function () {
         gulp.src('./dist/src/main/api/index.js')
-        .pipe(livereload())
-        .pipe(notify('Server restarted'));
+        .pipe(livereload());
     });
 
 });
