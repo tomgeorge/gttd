@@ -1,7 +1,10 @@
 'use strict';
 
 var gulp = require('gulp'),
+    nodemon = require('gulp-nodemon'),
+    livereload = require('gulp-livereload'),
     debug = require('gulp-debug'),
+    notify = require('gulp-notify'),
     inject = require('gulp-inject'),
     tsc = require('gulp-typescript'),
     tslint = require('gulp-tslint'),
@@ -72,22 +75,17 @@ gulp.task('watch', function() {
     gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts']);
 });
 
-gulp.task('serve', ['compile-ts', 'watch'], function() {
-  process.stdout.write('Starting browserSync and superstatic...\n');
-  browserSync({
-    port: 3000,
-    files: ['index.html', '**/*.js'],
-    injectChanges: true,
-    logFileChanges: false,
-    logLevel: 'silent',
-    logPrefix: 'angularin20typescript',
-    notify: true,
-    reloadDelay: 0,
-    server: {
-      baseDir: './src',
-      middleware: superstatic({ debug: false})
-    }
-  });
+gulp.task('serve', ['compile-ts'], function () {
+    livereload.listen();
+    gulp.watch('./src/**/*.ts', ['compile-ts']);
+
+    nodemon({
+        script: './dist/src/main/api/index.js'
+    }).on('restart', function () {
+        gulp.src('./dist/src/main/api/index.js')
+        .pipe(livereload());
+    });
+
 });
 
 gulp.task('default', ['ts-lint', 'compile-ts']);

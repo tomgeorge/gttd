@@ -17,7 +17,7 @@
     "test-watch": "karma start --no-single-run --auto-watch",
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
-    "start": "node dist/src/main/api/index.js",
+    "start": "gulp serve",
     "postinstall": "typings install",
     "typings": "typings install"
   },
@@ -47,10 +47,14 @@
   },
   "devDependencies": {
     "browser-sync": "^2.13.0",
+    "codelyzer": "0.0.23",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-debug": "^2.1.2",
     "gulp-inject": "^4.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-notify": "^2.2.0",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^5.0.0",
