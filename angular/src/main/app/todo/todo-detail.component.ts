@@ -5,13 +5,25 @@ import { Todo } from './todo.builder';
 import {TodoService} from './todo.service';
 import './todo.css';
 import { ConsoleLogService } from '../shared/console.log.service';
+import {Observable} from 'rxjs/Rx';
+import {TimerComponent} from './timer.ts';
 
 @Component({
   selector: 'todo-detail',
   template: require('./todo-detail.component.html'),
+  directives: [TimerComponent]
 })
 
 export class TodoDetailComponent {
+
+  timer: Observable<number>;
+  subscription: any;
+
+  ticks =0;
+  ngOnInit(){
+    this.timer = Observable.timer(0,1000);
+     this.subscription = this.timer.subscribe(t=>this.ticks = t);
+  }
 
   @Input()
   todo: Todo;
@@ -34,6 +46,8 @@ export class TodoDetailComponent {
   pause(Todo: Todo) {
     this.logger.log('Paused: ' + Todo.name);
     Todo.inProgress = false;
+    this.subscription.unsubscribe();
+
     let now = moment;
     this.logger.log(now.duration(Todo.time).milliseconds());
     Todo.time = Todo.time + Date.now() - Todo.startTime;
@@ -44,6 +58,10 @@ export class TodoDetailComponent {
     this.logger.log('Played: ' + Todo.name);
     Todo.inProgress = true;
     Todo.startTime = Date.now();
+    this.timer.subscribe(t => {
+        Todo.time += t;
+        this.logger.log('Todo.time: ' + this.currentTimeSpent(Todo));
+      });
   }
 
   delete() {
@@ -56,9 +74,16 @@ export class TodoDetailComponent {
     this.logger.log(`selected todo name ${this.selectedTodo.name}`);
   }
 
+  setElapsedTime(elapsedTime: number) {
+    this.logger.log('In setElapsedTime: ' + elapsedTime);
+    this.todo.time = elapsedTime;
+  }
+
   public currentTimeSpent(Todo: Todo): string {
     return this.convertMillisecondsToDigitalClock(Todo.time).clock;
   }
+
+
 
   convertMillisecondsToDigitalClock(ms: number) {
     let hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds

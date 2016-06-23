@@ -1,9 +1,8 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import { Observable } from "rxjs/Rx";
-//import moment from "moment";
+import { Observable } from 'rxjs/Rx';
 
 @Component({
-    selector: "ng-timer",
+    selector: 'ng-timer',
     template: `
     <a *ngIf="inProgress" class="btn-flat" (click)="setInProgress()">
       <i class="material-icons">pause_circle_outline</i>
@@ -12,18 +11,17 @@ import { Observable } from "rxjs/Rx";
       <i class="material-icons">play_circle_outline</i>
     </a>
       {{time}}
-`,
-    inputs: ["startTime", "format"]
+`
 })
 export class TimerComponent  {
 
     public time: string;
-    ticks =0;
+    ticks = 0;
     ticks2 = 0;
 //    startTime = 0;
     totalTime = 0;
 //    inProgress = false;
-    mySub : any;
+    mySub: any;
 
     @Input()
     format: string;
@@ -41,9 +39,9 @@ export class TimerComponent  {
     @Output()
     elapsedTime = new EventEmitter();
 
-    timer = Observable.timer(1,1000);
+    timer = Observable.timer(1, 1000);
 
-    tickerFunc2(tick: number){
+    tickerFunc2(tick: number) {
         this.time = this.convertMillisecondsToDigitalClock(this.totalTime + tick).clock;
       }
 
@@ -54,16 +52,14 @@ export class TimerComponent  {
             this.totalTime = this.totalTime + (Date.now() - this.startTime);
             this.mySub.unsubscribe();
             this.elapsedTime.emit(this.totalTime);
-          }
-          else {
+          } else {
             this.startTime = Date.now();
             this.ticks2 = this.totalTime;
 
             this.inProgress = true;
-         this.mySub = this.timer.subscribe(t => this.tickerFunc2(t*1000));
+            this.mySub = this.timer.subscribe(t => this.tickerFunc2(t * 1000));
          }
-            console.log('setInProgress called, value now: ' + this.inProgress);
-
+         console.log('setInProgress called, value now: ' + this.inProgress);
       }
 
       convertMillisecondsToDigitalClock(ms: number) {

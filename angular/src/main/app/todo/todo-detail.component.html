@@ -1,5 +1,5 @@
 <div class="col m4">
-  <div class="card hoverable waves-effect waves-blockgrey lighten-3" (click)="onSelect(todo)">
+  <div class="card hoverable waves-effect waves-block green lighten-3" (click)="onSelect(todo)">
     <div class="card-content grey-darken-4-text">
       <a class="waves-effect btn-flag text-align: right" (click)="delete()">
         <i class="material-icons text-align: right">clear</i>
@@ -8,15 +8,17 @@
       <p><label>description: </label>{{todo.description}}</p>
       <p><label *ngIf="todo.inProgress">In Progress</label></p>
       <p><label *ngIf="!todo.inProgress">Not Started</label></p>
-      <p><label>Time Spent: </label>{{currentTimeSpent(todo)}}</p>
     </div>
-    <div class="card-action black-text">
-      <a *ngIf="todo.inProgress" class="waves-effect btn-flat" (click)="pause(todo)">
+    <div class="card-action green-text">
+      <ng-timer  [format]="'mm:ss:SSS'">
+        (elapsedTime)="setElapsedTime($event)"
+      </ng-timer>
+      <!-- <a *ngIf="todo.inProgress" class="waves-effect btn-flat" (click)="pause(todo)">
         <i class="material-icons">pause_circle_outline</i>
       </a>
       <a *ngIf="!todo.inProgress" class="waves-effect  btn-large btn-flat" (click)="setInProgress(todo)">
         <i class="material-icons">play_circle_outline</i>
-      </a>
+      </a> -->
     </div>
   </div>
 </div>

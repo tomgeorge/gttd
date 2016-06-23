@@ -28,7 +28,7 @@ export class TodoBuilder {
         if (this.name) {
             return this.name;
         } else {
-            return 'Default';
+            return 'Finish Hackathon!';
         }
     }
 
@@ -41,7 +41,7 @@ export class TodoBuilder {
         if (this.description) {
             return this.description;
         } else {
-            return 'Default';
+            return 'Or else!';
         }
     }
 
