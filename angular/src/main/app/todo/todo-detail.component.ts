@@ -16,15 +16,6 @@ import {TimerComponent} from './timer.ts';
 
 export class TodoDetailComponent {
 
-  timer: Observable<number>;
-  subscription: any;
-
-  ticks =0;
-  ngOnInit(){
-    this.timer = Observable.timer(0,1000);
-     this.subscription = this.timer.subscribe(t=>this.ticks = t);
-  }
-
   @Input()
   todo: Todo;
   error: any;
@@ -46,7 +37,6 @@ export class TodoDetailComponent {
   pause(Todo: Todo) {
     this.logger.log('Paused: ' + Todo.name);
     Todo.inProgress = false;
-    this.subscription.unsubscribe();
 
     let now = moment;
     this.logger.log(now.duration(Todo.time).milliseconds());
@@ -58,10 +48,6 @@ export class TodoDetailComponent {
     this.logger.log('Played: ' + Todo.name);
     Todo.inProgress = true;
     Todo.startTime = Date.now();
-    this.timer.subscribe(t => {
-        Todo.time += t;
-        this.logger.log('Todo.time: ' + this.currentTimeSpent(Todo));
-      });
   }
 
   delete() {
@@ -74,9 +60,9 @@ export class TodoDetailComponent {
     this.logger.log(`selected todo name ${this.selectedTodo.name}`);
   }
 
-  setElapsedTime(elapsedTime: number) {
-    this.logger.log('In setElapsedTime: ' + elapsedTime);
-    this.todo.time = elapsedTime;
+  setElapsedTime($event) {
+    this.logger.log('In setElapsedTime: ' + $event.value);
+    this.todo.time = $event.value;
   }
 
   public currentTimeSpent(Todo: Todo): string {

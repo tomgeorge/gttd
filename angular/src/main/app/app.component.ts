@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TodoListComponent } from './todolist/todolist.component';
 import { TodoDetailComponent } from './todo/todo-detail.component';
 import { NotFoundComponent } from './notfound/notfound.component';
+import { Home } from './home/home';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { NgRedux } from 'ng2-redux';
 import { IAppState, enhancers } from './store/store';
@@ -86,6 +87,11 @@ const createLogger = require('redux-logger');
         component: TodoListComponent,
     },
     {
+        path: '/home',
+        name: 'Home',
+        component: Home,
+    },
+    {
         path: '/',
         redirectTo: ['Todos']
     },
@@ -103,7 +109,7 @@ const createLogger = require('redux-logger');
 export class AppComponent {
 
     url = 'https://github.com/preboot/angular2-webpack';
-    title = 'Hello';
+    title = 'Hi Kadhum';
 
     constructor(
         private ngRedux: NgRedux<IAppState>) {
