@@ -2,26 +2,28 @@ import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
+import './home.css';
 const styles = require('./home.css');
 const template = require('./home.html');
- 
+
 @Component({
   selector: 'home',
   directives: [ CORE_DIRECTIVES ],
-  template: template,
-  styles: [ styles ]
+  template: template//,
+//  styles: [ styles ]
 })
 export class Home {
   jwt: string;
   decodedJwt: string;
   response: string;
   api: string;
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(public router: Router, public http: Http, public authHttp: AuthHttp) {
     this.jwt = localStorage.getItem('id_token');
-    this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);
+    this.decodedJwt = this.jwtHelper.decodeToken(this.jwt);
   }
 
   logout() {

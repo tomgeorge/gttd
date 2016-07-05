@@ -7,10 +7,11 @@ import { TodoListComponent } from './todolist/todolist.component';
 import { TodoDetailComponent } from './todo/todo-detail.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { Home } from './home/home';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { NgRedux } from 'ng2-redux';
 import { IAppState, enhancers } from './store/store';
 import rootReducer from './reducers/index';
+import { AuthGuard } from './common/auth.guard';
 
 const createLogger = require('redux-logger');
 
@@ -24,9 +25,9 @@ const createLogger = require('redux-logger');
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">{{title}}</a>
                         <ul class="right hide-on-med-and-down">
-                            <li><a class="waves-effect waves-teal" [routerLink]="['Dashboard']">Dashboard</a></li>
-                            <li><a [routerLink]="['Heroes']">Heroes</a></li>
-                            <li><a [routerLink]="['Todos']">Todos</a></li>
+                            <li><a class="waves-effect waves-teal" [routerLink]="['dashboard']">Dashboard</a></li>
+                            <li><a [routerLink]="['heroes']">Heroes</a></li>
+                            <li><a [routerLink]="['todos']">Todos</a></li>
                         </ul>
                 </div>
             </div>
@@ -64,47 +65,11 @@ const createLogger = require('redux-logger');
         </footer>
     `,
     directives: [ROUTER_DIRECTIVES, TodoDetailComponent, TodoListComponent],
-    providers: [ROUTER_PROVIDERS,
+    providers: [
         HeroService,
         TodoService
         ]
 })
-
-@RouteConfig([
-    {
-        path: '/heroes',
-        name: 'Heroes',
-        component: HeroesComponent
-    },
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: DashboardComponent
-    },
-    {
-        path: '/todos',
-        name: 'Todos',
-        component: TodoListComponent,
-    },
-    {
-        path: '/home',
-        name: 'Home',
-        component: Home,
-    },
-    {
-        path: '/',
-        redirectTo: ['Todos']
-    },
-    {
-        path: '/notfound',
-        name: 'NotFound',
-        component: NotFoundComponent
-    },
-    {
-        path: '/*path',
-        redirectTo: ['NotFound']
-    }
-])
 
 export class AppComponent {
 
@@ -112,6 +77,7 @@ export class AppComponent {
     title = 'Hi Kadhum';
 
     constructor(
+        public router: Router,
         private ngRedux: NgRedux<IAppState>) {
         this.ngRedux.configureStore(
             rootReducer,
