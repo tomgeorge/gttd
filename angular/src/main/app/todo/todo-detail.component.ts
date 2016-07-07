@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
 import * as moment from 'moment';
 import { Todo } from './todo.builder';
 import {TodoService} from './todo.service';
@@ -13,7 +12,7 @@ import {TimerComponent} from './timer.component';
   template: require('./todo-detail.component.html'),
   directives: [TimerComponent]
 })
-
+ 
 export class TodoDetailComponent {
 
   @Input()
@@ -26,8 +25,7 @@ export class TodoDetailComponent {
 
   constructor(
     private logger: ConsoleLogService,
-    private todoService: TodoService,
-    private routeParams: RouteParams) { }
+    private todoService: TodoService) { }
 
   toggle(Todo: Todo) {
     this.logger.log('toggled: ' + Todo.description);
