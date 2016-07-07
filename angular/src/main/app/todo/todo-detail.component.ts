@@ -6,7 +6,7 @@ import {TodoService} from './todo.service';
 import './todo.css';
 import { ConsoleLogService } from '../shared/console.log.service';
 import {Observable} from 'rxjs/Rx';
-import {TimerComponent} from './timer.ts';
+import {TimerComponent} from './timer.component';
 
 @Component({
   selector: 'todo-detail',
