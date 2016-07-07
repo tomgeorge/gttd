@@ -6,6 +6,9 @@ services:
             dockerfile: docker/api/data/Dockerfile
         volumes:
            - ./api:/home/api
+        networks:
+           - front
+           - back
     api:
        build:  
            context: ./api
@@ -14,6 +17,9 @@ services:
            - "3000:3000"
        volumes_from:
            - api_data
+       networks:
+           - front
+           - back
 
     data:
         build: 
@@ -21,6 +27,8 @@ services:
             dockerfile: docker/data/Dockerfile
         volumes:
            - .:/home/app
+        networks:
+           - front
 
     app:
         build: 
@@ -30,6 +38,8 @@ services:
             - data
         ports:
             - "8080:8080"
+        networks:
+            - front
 
     test:
         build: 
@@ -39,14 +49,16 @@ services:
             - data
         ports:
             - "9876:9876"
-        external_links:
-            - api_api:api
+        networks:
+            - front
 
 
     mongodata:
         build: 
             context: .
             dockerfile: docker/mongo_data/Dockerfile
+        networks:
+            - back
 
     mongo:
         image: mongo:3.2.6
@@ -55,6 +67,13 @@ services:
         ports:
             - "27017:27017"
         command: --smallfiles --rest
+        networks:
+            - back
 
     redis:
         image: redis:3.2.0-alpine
+        networks:
+            - back
+networks:
+    front:
+    back:

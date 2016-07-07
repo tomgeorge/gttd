@@ -74,7 +74,8 @@ const createLogger = require('redux-logger');
 export class AppComponent {
 
     url = 'https://github.com/preboot/angular2-webpack';
-    title = 'Hi Kadhum';
+
+    title = 'Todosssss';
 
     constructor(
         public router: Router,

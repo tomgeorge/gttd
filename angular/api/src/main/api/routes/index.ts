@@ -2,5 +2,5 @@ import { Request, Response } from 'express';
 
 
 export function index(request: Request, response: Response) {
-    response.send('hello world');
+    response.send('index');
 }
