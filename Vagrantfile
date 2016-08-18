@@ -28,9 +28,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: "apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D"
   config.vm.provision "shell", inline: "echo deb https://apt.dockerproject.org/repo ubuntu-trusty main > /etc/apt/sources.list.d/docker.list"
   config.vm.provision "shell", inline: "apt-get update"
-  config.vm.provision "shell", inline: "apt-get purge lxc-docker"
+  config.vm.provision "shell", inline: "apt-get purge -y lxc-docker"
   config.vm.provision "shell", inline: "apt-get update"
-  config.vm.provision "shell", inline: "apt-get install docker-engine"
+  config.vm.provision "shell", inline: "apt-get install -y docker-engine"
   config.vm.provision "shell", inline: "service docker restart"
 
   # forward port 8080
@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "public_network", ip: "10.0.1.211"
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-	  vb.memory = 4096
-    #vb.gui = true
+	vb.memory = 4096
+	#vb.gui = true
   end
 end
