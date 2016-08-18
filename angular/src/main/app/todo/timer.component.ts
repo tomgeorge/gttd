@@ -37,7 +37,7 @@ export class TimerComponent  {
     // stopped = new EventEmitter<number>();
 
     @Output()
-    elapsedTime = new EventEmitter();
+    elapsedTimeChange = new EventEmitter();
 
     timer = Observable.timer(1, 1000);
 
@@ -51,7 +51,11 @@ export class TimerComponent  {
             this.inProgress = false;
             this.totalTime = this.totalTime + (Date.now() - this.startTime);
             this.mySub.unsubscribe();
-            this.elapsedTime.emit(this.totalTime);
+            this.elapsedTimeChange.emit({
+              value: this.totalTime
+            });
+            console.log('Pausing, totalTime now: ' + this.totalTime);
+
           } else {
             this.startTime = Date.now();
             this.ticks2 = this.totalTime;

@@ -1,29 +1,19 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
 import * as moment from 'moment';
 import { Todo } from './todo.builder';
 import {TodoService} from './todo.service';
 import './todo.css';
 import { ConsoleLogService } from '../shared/console.log.service';
 import {Observable} from 'rxjs/Rx';
-import {TimerComponent} from './timer.ts';
+import {TimerComponent} from './timer.component';
 
 @Component({
   selector: 'todo-detail',
   template: require('./todo-detail.component.html'),
   directives: [TimerComponent]
 })
-
+ 
 export class TodoDetailComponent {
-
-  timer: Observable<number>;
-  subscription: any;
-
-  ticks =0;
-  ngOnInit(){
-    this.timer = Observable.timer(0,1000);
-     this.subscription = this.timer.subscribe(t=>this.ticks = t);
-  }
 
   @Input()
   todo: Todo;
@@ -35,8 +25,7 @@ export class TodoDetailComponent {
 
   constructor(
     private logger: ConsoleLogService,
-    private todoService: TodoService,
-    private routeParams: RouteParams) { }
+    private todoService: TodoService) { }
 
   toggle(Todo: Todo) {
     this.logger.log('toggled: ' + Todo.description);
@@ -46,7 +35,6 @@ export class TodoDetailComponent {
   pause(Todo: Todo) {
     this.logger.log('Paused: ' + Todo.name);
     Todo.inProgress = false;
-    this.subscription.unsubscribe();
 
     let now = moment;
     this.logger.log(now.duration(Todo.time).milliseconds());
@@ -58,10 +46,6 @@ export class TodoDetailComponent {
     this.logger.log('Played: ' + Todo.name);
     Todo.inProgress = true;
     Todo.startTime = Date.now();
-    this.timer.subscribe(t => {
-        Todo.time += t;
-        this.logger.log('Todo.time: ' + this.currentTimeSpent(Todo));
-      });
   }
 
   delete() {
@@ -74,9 +58,9 @@ export class TodoDetailComponent {
     this.logger.log(`selected todo name ${this.selectedTodo.name}`);
   }
 
-  setElapsedTime(elapsedTime: number) {
-    this.logger.log('In setElapsedTime: ' + elapsedTime);
-    this.todo.time = elapsedTime;
+  setElapsedTime($event) {
+    this.logger.log('In setElapsedTime: ' + $event.value);
+    this.todo.time = $event.value;
   }
 
   public currentTimeSpent(Todo: Todo): string {
