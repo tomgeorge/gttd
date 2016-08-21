@@ -40,6 +40,9 @@ module.exports = function makeWebpackConfig() {
   // add debug messages
   config.debug = !isProd || !isTest;
 
+  config.watchOptions = {
+    poll: 1000
+  }
   /**
    * Entry
    * Reference: http://webpack.github.io/docs/configuration.html#entry
