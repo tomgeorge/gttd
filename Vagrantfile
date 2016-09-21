@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/busty"
 
   # install node et al
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "public_network", ip: "10.0.1.211"
   config.vm.provider :virtualbox do |vb|
   	vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-	vb.memory = 4096
+	vb.memory = 2048
 	#vb.gui = true
   end
 end

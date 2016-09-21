@@ -1,0 +1,27 @@
+@import '~materialize-css/sass/components/color';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #123;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+$primary-color: color("purple", "lighten-2") !default;

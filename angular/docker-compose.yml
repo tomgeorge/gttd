@@ -53,27 +53,27 @@ services:
             - front
 
 
-    mongodata:
-        build: 
-            context: .
-            dockerfile: docker/mongo_data/Dockerfile
-        networks:
-            - back
-
-    mongo:
-        image: mongo:3.2.6
-        volumes_from:
-            - mongodata
-        ports:
-            - "27017:27017"
-        command: --smallfiles --rest
-        networks:
-            - back
-
-    redis:
-        image: redis:3.2.0-alpine
-        networks:
-            - back
+#    mongodata:
+#        build: 
+#            context: .
+#            dockerfile: docker/mongo_data/Dockerfile
+#        networks:
+#            - back
+#
+#    mongo:
+#        image: mongo:3.2.6
+#        volumes_from:
+#            - mongodata
+#        ports:
+#            - "27017:27017"
+#        command: --smallfiles --rest
+#        networks:
+#            - back
+#
+#    redis:
+#        image: redis:3.2.0-alpine
+#        networks:
+#            - back
 networks:
     front:
     back:
